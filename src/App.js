@@ -6,7 +6,6 @@ function App() {
   return (
     <div className="App">
       <h1>Welcome to 7-bit news!</h1>
-
       <MessageForm />
     </div>
   );
