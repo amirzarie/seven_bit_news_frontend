@@ -1,0 +1,8 @@
+runtime: nodejs16
+service: frontend  # This names the service "frontend"
+
+handlers:
+- url: /
+  static_dir: build
+- url: /.*
+  script: auto
