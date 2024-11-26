@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import "./App.css";
 import MessageForm from "./components/MessageForm";
 import SignIn from "./components/SignIn";
-import "./App.css";
-// import { getAuth, signOut } from "firebase/auth";
 import SignOut from "./components/SignOut";
 
 function App() {
@@ -12,15 +10,17 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Welcome to 7-bit news!</h1>
+      <header className="app-header">
+        <h1>7-bit news</h1>
+        {user ? <SignOut setUser={setUser} /> : <SignIn setUser={setUser} />}
+      </header>
       {user ? (
         <>
           <p>Signed in as: {user.displayName}</p>
           <MessageForm />
-          <SignOut setUser={setUser} />
         </>
       ) : (
-        <SignIn setUser={setUser} />
+        <p>Please sign in to start chatting.</p>
       )}
     </div>
   );

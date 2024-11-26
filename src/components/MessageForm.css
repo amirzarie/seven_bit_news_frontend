@@ -1,0 +1,156 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 40px;
+  max-width: 800px;
+}
+
+.chat-messages {
+  max-height: 70vh; /* Adjustable based on preference */
+  overflow-y: auto;
+  width: 100%; /* Matches the width of the container */
+  margin-bottom: 80px; /* Leave space for the input box */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.chat-message {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 40px;
+  max-width: 800px;
+}
+
+.chat-messages {
+  max-height: 70vh; /* Adjustable based on preference */
+  overflow-y: auto;
+  width: 100%; /* Matches the width of the container */
+  margin-bottom: 80px; /* Leave space for the input box */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.chat-message {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.chat-message.user {
+  background-color: #d1e7ff; /* Light blue background for user messages */
+  align-self: flex-end; /* Push to the right */
+  text-align: right;
+  margin-left: 15%; /* Add spacing from the right edge */
+}
+
+.chat-message.assistant {
+  background-color: #e2e3e5; /* Light gray background for assistant messages */
+  align-self: flex-start; /* Keep on the left */
+  margin-left: 2%; /* Add spacing from the left edge */
+}
+
+.message-form-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  z-index: 1000; /* Ensure it stays on top of other elements */
+}
+
+.message-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.message-form input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.message-form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.message-form button:hover {
+  background-color: #0056b3;
+}
+
+.message-form-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  z-index: 1000; /* Ensure it stays on top of other elements */
+}
+
+.message-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.message-form input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.message-form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.message-form button:hover {
+  background-color: #0056b3;
+}
