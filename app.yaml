@@ -1,8 +1,14 @@
 runtime: nodejs18
-service: frontend  # This names the service "frontend"
+service: frontend
 
 handlers:
-- url: /
-  static_dir: build
-- url: /.*
-  script: auto
+  - url: /static
+    static_dir: build/static
+
+  - url: /(.*\..+)
+    static_files: build/\1
+    upload: build/(.*\..+)
+
+  - url: /.*
+    static_files: build/index.html
+    upload: build/index.html
