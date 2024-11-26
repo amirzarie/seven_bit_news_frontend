@@ -8,7 +8,7 @@ function MessageForm() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/send-message", {
+      const res = await fetch("https://backend-dot-seven-bit-news.nn.r.appspot.com/api/send-message", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
