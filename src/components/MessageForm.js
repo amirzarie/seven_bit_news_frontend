@@ -2,34 +2,22 @@ import React, { useState } from "react";
 
 function MessageForm() {
   const [message, setMessage] = useState(""); // State to hold user input
-  const [chatHistory, setChatHistory] = useState([]); // State to hold chat history
   const [response, setResponse] = useState(""); // State to hold backend response
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Backend URL
-    const backendUrl = "http://127.0.0.1:8000/api/send-message";
-
     try {
-      // Send the message and chat history to the backend
-      const res = await fetch(backendUrl, {
+      const res = await fetch("http://127.0.0.1:8000/api/send-message", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message, chat_history: chatHistory }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
       });
 
-      if (!res.ok) {
-        throw new Error("Failed to send message");
-      }
+      if (!res.ok) throw new Error("Failed to send message");
 
       const data = await res.json(); // Parse the response
-
-      // Update the chat history with the new messages
-      setChatHistory(data.chat_history || []);
-      setResponse(data.response); // Display the latest response
+      setResponse(data.response); // Display the backend's response
       setMessage(""); // Clear the input field
     } catch (error) {
       console.error(error);
@@ -53,18 +41,11 @@ function MessageForm() {
         <button type="submit">Send</button>
       </form>
 
-      <div>
-        <h3>Chat History:</h3>
-        <ul>
-          {chatHistory.map((entry, index) => (
-            <li key={index}>
-              <strong>{entry.role === "user" ? "You" : "Assistant"}:</strong> {entry.content}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {response && <p><strong>Latest Response:</strong> {response}</p>}
+      {response && (
+        <p>
+          <strong>Response:</strong> {response}
+        </p>
+      )}
     </div>
   );
 }
