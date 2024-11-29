@@ -1,37 +1,140 @@
 /* App.css */
 .app-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #007bff;
-    color: white;
-    display: flex;
-    justify-content: center; /* Center content horizontally */
-    align-items: center;    /* Center content vertically */
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-  }
-  
-  .app-header h1 {
-    margin-right: 20px; /* Add spacing between the title and the button */
-    font-size: 24px;
-  }
-  
-  .app-header button {
-    background-color: white;
-    color: #007bff;
-    border: 1px solid #007bff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: 10px; /* Add spacing between multiple buttons */
-  }
-  
-  .app-header button:hover {
-    background-color: #0056b3;
-    color: white;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.app-header h1 {
+  margin-right: 20px; /* Add spacing between the title and the button */
+  font-size: 24px;
+}
+
+.app-header button {
+  background-color: white;
+  color: #007bff;
+  border: 1px solid #007bff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px; /* Add spacing between multiple buttons */
+}
+
+.app-header button:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 80px; /* Add space to push content below the fixed header */
+  padding: 20px; /* Optional: Add padding for better spacing */
+}
+
+.topic-container {
+  width: 30%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.topic-response {
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.chat-container {
+  width: 65%;
+  margin: 0 auto; /* Center the chat container */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center contents inside the chat container */
+}
+
+.chat-messages {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  width: 100%; /* Stretch to fill the chat container */
+  display: flex;
+  flex-direction: column; /* Align messages vertically */
+  justify-content: flex-start; /* Start messages from the top */
+  align-items: center; /* Center messages horizontally */
+}
+
+.chat-message {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 85%;
+  word-wrap: break-word;
+  align-self: stretch; /* Stretch messages to match parent width */
+}
+
+.chat-message.user {
+  background-color: #d1e7ff;
+  align-self: flex-end; /* Align user's messages to the right */
+}
+
+.chat-message.assistant {
+  background-color: #e2e3e5;
+  align-self: flex-start; /* Align assistant's messages to the left */
+}
+
+.message-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+  width: 80%; /* Stretch the form to match container width */
+}
+
+.message-form input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.message-form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.message-form button.send-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.message-form button.send-button:hover {
+  background-color: #0056b3;
+}
+
+.message-form button.reset-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.message-form button.reset-button:hover {
+  background-color: #b02a37;
+}

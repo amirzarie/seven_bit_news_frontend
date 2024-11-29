@@ -17,7 +17,9 @@ function App() {
       {user ? (
         <>
           <p>Signed in as: {user.displayName}</p>
-          <MessageForm />
+          <div className="content-container">
+            <MessageForm user={user} />
+          </div>
         </>
       ) : (
         <p>Please sign in to start chatting.</p>
