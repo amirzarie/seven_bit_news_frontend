@@ -40,7 +40,7 @@ function MessageForm({ user }) {
   const handleReset = async () => {
     try {
       // const res = await fetch("http://127.0.0.1:8000/api/reset", {
-        const res = await fetch("https://backend-dot-seven-bit-news.nn.r.appspot.com/api/reset", {
+      const res = await fetch("https://backend-dot-seven-bit-news.nn.r.appspot.com/api/reset", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
