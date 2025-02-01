@@ -17,9 +17,9 @@ function App() {
   const handleSendMessage = async (message) => {
     setIsLoading(true);
     try {
-      // const response = await fetch('http://localhost:8000/api/chat', {
       const response = await fetch(
-        "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat",
+        // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat",
+        "http://localhost:8000/api/chat",
         {
           method: "POST",
           headers: {
@@ -54,9 +54,9 @@ function App() {
   const handleReset = async () => {
     setIsLoading(true);
     try {
-      // await fetch('http://localhost:8000/api/reset', {
       await fetch(
-        "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/reset",
+        // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/reset",
+        "http://localhost:8000/api/chat",
         {
           method: "POST",
           headers: {
