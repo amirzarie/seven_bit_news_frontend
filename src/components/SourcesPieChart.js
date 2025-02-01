@@ -22,24 +22,24 @@ const SourcesPieChart = ({ sourceCounts }) => {
       sources: ["Fox News", "The Wall Street Journal", "The Washington Times"],
       colors: [
         { bg: "rgba(220, 53, 69, 0.8)", border: "rgba(220, 53, 69, 1)" }, // bright red
-        { bg: "rgba(139, 0, 0, 0.8)", border: "rgba(139, 0, 0, 1)" }, // dark red
-        { bg: "rgba(255, 160, 160, 0.8)", border: "rgba(255, 160, 160, 1)" }, // light pink-red
+        { bg: "rgba(220, 53, 69, 0.6)", border: "rgba(220, 53, 69, 1)" }, // dark red
+        { bg: "rgba(220, 53, 69, 0.4)", border: "rgba(220, 53, 69, 1)" }, // light pink-red
       ],
     },
     democratic: {
       sources: ["CNN", "MSNBC", "The Huffington Post"],
       colors: [
         { bg: "rgba(0, 123, 255, 0.8)", border: "rgba(0, 123, 255, 1)" }, // bright blue
-        { bg: "rgba(0, 0, 139, 0.8)", border: "rgba(0, 0, 139, 1)" }, // dark blue
-        { bg: "rgba(135, 206, 250, 0.8)", border: "rgba(135, 206, 250, 1)" }, // light sky blue
+        { bg: "rgba(0, 123, 255, 0.6)", border: "rgba(0, 123, 255, 1)" }, // dark blue
+        { bg: "rgba(0, 123, 255, 0.4)", border: "rgba(0, 123, 255, 1)" }, // light sky blue
       ],
     },
     centrist: {
       sources: ["Reuters", "Associated Press", "BBC News"],
       colors: [
         { bg: "rgba(40, 167, 69, 0.8)", border: "rgba(40, 167, 69, 1)" }, // bright green
-        { bg: "rgba(0, 100, 0, 0.8)", border: "rgba(0, 100, 0, 1)" }, // dark green
-        { bg: "rgba(144, 238, 144, 0.8)", border: "rgba(144, 238, 144, 1)" }, // light green
+        { bg: "rgba(40, 167, 69, 0.6)", border: "rgba(40, 167, 69, 1)" }, // dark green
+        { bg: "rgba(40, 167, 69, 0.4)", border: "rgba(40, 167, 69, 1)" }, // light green
       ],
     },
   };
