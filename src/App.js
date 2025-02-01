@@ -4,7 +4,8 @@ import "./App.css";
 import MessageForm from "./components/MessageForm";
 import SignIn from "./components/SignIn";
 import SignOut from "./components/SignOut";
-import SourcesPieChart from './components/SourcesPieChart';
+import SourcesPieChart from "./components/SourcesPieChart";
+import WordCloud from "./components/WordCloud";
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -15,6 +16,8 @@ function App() {
   const [user, setUser] = useState(null);
   const messagesEndRef = useRef(null);
   const [sourceCounts, setSourceCounts] = useState({});
+  const [wordFrequencies, setWordFrequencies] = useState({});
+  const [currentTopic, setCurrentTopic] = useState("");
 
   const handleSendMessage = async (message) => {
     setIsLoading(true);
@@ -41,8 +44,14 @@ function App() {
 
       const data = await response.json();
       setMessages(data.chat_history);
+      if (messages.length === 0) {
+        setCurrentTopic(message);
+      }
       if (data.source_counts) {
         setSourceCounts(data.source_counts);
+      }
+      if (data.word_frequencies) {
+        setWordFrequencies(data.word_frequencies);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -71,6 +80,8 @@ function App() {
       );
       setMessages([]);
       setSourceCounts({});
+      setWordFrequencies({});
+      setCurrentTopic("");
     } catch (error) {
       console.error("Error resetting chat:", error);
     } finally {
@@ -108,6 +119,14 @@ function App() {
       {user ? (
         <>
           <p>Signed in as: {user.displayName}</p>
+          {currentTopic && (
+            <div className="current-topic">
+              <div className="topic-content">
+                <span className="topic-label">Current Topic:</span>
+                <span className="topic-text">"{currentTopic.toUpperCase()}"</span>
+              </div>
+            </div>
+          )}
           <div className="content-container">
             <div className="chat-section">
               <div className="chat-container">
@@ -121,7 +140,9 @@ function App() {
                     <div
                       key={index}
                       className={`message ${
-                        msg.role === "user" ? "user-message" : "assistant-message"
+                        msg.role === "user"
+                          ? "user-message"
+                          : "assistant-message"
                       }`}
                     >
                       <div className="message-content">{msg.content}</div>
@@ -138,8 +159,19 @@ function App() {
                 />
               </div>
             </div>
-            <div className="stats-section">
-              <SourcesPieChart sourceCounts={sourceCounts} />
+            <div className="visualizations-section">
+              <div className="visualization-container">
+                <SourcesPieChart 
+                  sourceCounts={sourceCounts} 
+                  currentTopic={currentTopic}
+                />
+              </div>
+              <div className="visualization-container">
+                <WordCloud 
+                  wordFrequencies={wordFrequencies} 
+                  currentTopic={currentTopic}
+                />
+              </div>
             </div>
           </div>
         </>

@@ -11,7 +11,7 @@ import {
 // Register the required Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend, Colors);
 
-const SourcesPieChart = ({ sourceCounts }) => {
+const SourcesPieChart = ({ sourceCounts, currentTopic }) => {
   if (!sourceCounts || Object.keys(sourceCounts).length === 0) {
     return null;
   }
@@ -46,7 +46,7 @@ const SourcesPieChart = ({ sourceCounts }) => {
 
   // Function to get color for a news source
   const getSourceColor = (source) => {
-    for (const [category, data] of Object.entries(newsCategories)) {
+    for (const [, data] of Object.entries(newsCategories)) {
       const sourceIndex = data.sources.findIndex((s) =>
         source.toLowerCase().includes(s.toLowerCase())
       );
@@ -96,19 +96,25 @@ const SourcesPieChart = ({ sourceCounts }) => {
         },
       },
       title: {
-        display: true,
-        text: "News Sources Distribution",
-        color: "black",
-        font: {
-          size: 16,
-        },
+        display: false,
       },
     },
   };
 
   return (
-    <div className="pie-chart-container">
-      <Pie data={data} options={options} />
+    <div>
+      <h3 style={{ 
+        marginBottom: '10px',
+        marginTop: '0px',
+        textAlign: 'center',
+        color: '#333',
+        fontSize: '16px'
+      }}>News Sources for "{currentTopic.toUpperCase()}"</h3>
+      <div className="pie-chart-container">
+        <div style={{ width: '90%', margin: '0 auto' }}>
+          <Pie data={data} options={options} />
+        </div>
+      </div>
     </div>
   );
 };
