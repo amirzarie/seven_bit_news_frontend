@@ -4,6 +4,7 @@ import "./App.css";
 import MessageForm from "./components/MessageForm";
 import SignIn from "./components/SignIn";
 import SignOut from "./components/SignOut";
+import SourcesPieChart from './components/SourcesPieChart';
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -13,6 +14,7 @@ function App() {
   );
   const [user, setUser] = useState(null);
   const messagesEndRef = useRef(null);
+  const [sourceCounts, setSourceCounts] = useState({});
 
   const handleSendMessage = async (message) => {
     setIsLoading(true);
@@ -39,6 +41,9 @@ function App() {
 
       const data = await response.json();
       setMessages(data.chat_history);
+      if (data.source_counts) {
+        setSourceCounts(data.source_counts);
+      }
     } catch (error) {
       console.error("Error:", error);
       // Add error message to chat
@@ -65,6 +70,7 @@ function App() {
         }
       );
       setMessages([]);
+      setSourceCounts({});
     } catch (error) {
       console.error("Error resetting chat:", error);
     } finally {
@@ -103,32 +109,37 @@ function App() {
         <>
           <p>Signed in as: {user.displayName}</p>
           <div className="content-container">
-            <div className="chat-container">
-              <div className="messages-container">
-                {messages.length === 0 && (
-                  <div className="welcome-message">
-                    Enter a topic to start the conversation
-                  </div>
-                )}
-                {messages.map((msg, index) => (
-                  <div
-                    key={index}
-                    className={`message ${
-                      msg.role === "user" ? "user-message" : "assistant-message"
-                    }`}
-                  >
-                    <div className="message-content">{msg.content}</div>
-                  </div>
-                ))}
-                {isLoading && (
-                  <div className="loading-message">Processing...</div>
-                )}
-                <div ref={messagesEndRef} />
+            <div className="chat-section">
+              <div className="chat-container">
+                <div className="messages-container">
+                  {messages.length === 0 && (
+                    <div className="welcome-message">
+                      Enter a topic to start the conversation
+                    </div>
+                  )}
+                  {messages.map((msg, index) => (
+                    <div
+                      key={index}
+                      className={`message ${
+                        msg.role === "user" ? "user-message" : "assistant-message"
+                      }`}
+                    >
+                      <div className="message-content">{msg.content}</div>
+                    </div>
+                  ))}
+                  {isLoading && (
+                    <div className="loading-message">Processing...</div>
+                  )}
+                  <div ref={messagesEndRef} />
+                </div>
+                <MessageForm
+                  onSendMessage={handleSendMessage}
+                  isLoading={isLoading}
+                />
               </div>
-              <MessageForm
-                onSendMessage={handleSendMessage}
-                isLoading={isLoading}
-              />
+            </div>
+            <div className="stats-section">
+              <SourcesPieChart sourceCounts={sourceCounts} />
             </div>
           </div>
         </>
