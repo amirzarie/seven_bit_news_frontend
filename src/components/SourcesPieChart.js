@@ -12,6 +12,7 @@ import {
 ChartJS.register(ArcElement, Tooltip, Legend, Colors);
 
 const SourcesPieChart = ({ sourceCounts, currentTopic }) => {
+  // Don't render anything if there's no data
   if (!sourceCounts || Object.keys(sourceCounts).length === 0) {
     return null;
   }
@@ -103,16 +104,27 @@ const SourcesPieChart = ({ sourceCounts, currentTopic }) => {
 
   return (
     <div>
-      <h3 style={{ 
-        marginBottom: '10px',
-        marginTop: '0px',
-        textAlign: 'center',
-        color: '#333',
-        fontSize: '16px'
-      }}>News Sources for "{currentTopic.toUpperCase()}"</h3>
+      <h3
+        style={{
+          marginBottom: "10px",
+          marginTop: "0px",
+          textAlign: "center",
+          color: "#000",
+          fontSize: "16px",
+        }}
+      >
+        News Sources for "{currentTopic.toUpperCase()}"
+      </h3>
       <div className="pie-chart-container">
-        <div style={{ width: '90%', margin: '0 auto' }}>
-          <Pie data={data} options={options} />
+        <div className="pie-chart-wrapper">
+          <Pie
+            data={data}
+            options={{
+              ...options,
+              maintainAspectRatio: true,
+              responsive: true,
+            }}
+          />
         </div>
       </div>
     </div>

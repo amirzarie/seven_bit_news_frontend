@@ -16,25 +16,27 @@ const WordCloud = ({ wordFrequencies, currentTopic }) => {
     // Convert data to the format needed by d3-cloud
     const words = Object.entries(wordFrequencies)
       .sort((a, b) => b[1] - a[1])
-      .slice(0, 25)
+      .slice(0, 60) // Increased from 40 to 60 words
       .map(([text, value]) => ({
         text,
-        // Adjust size scaling to create less dramatic differences between sizes
-        size: Math.log(value) * 15 + 15, // More linear scaling with smaller range
+        size: Math.log(value) * 10 + 10, // Reduced base size for better fit
       }));
 
     // For debugging (optional)
-    console.log("Top 25 words:", words.map(w => `${w.text}: ${wordFrequencies[w.text]}`));
+    console.log(
+      "Top 60 words:",
+      words.map((w) => `${w.text}: ${wordFrequencies[w.text]}`)
+    );
 
     // Set up the word cloud layout
     const layout = cloud()
       .size([600, 300])
       .words(words)
-      .padding(3)  // Reduced padding to fit more words
+      .padding(1) // Reduced padding further to fit more words
       .rotate(() => 0)
       .font("Impact")
       .fontSize((d) => d.size)
-      .spiral("rectangular")  // Changed to rectangular spiral for better word placement
+      .spiral("archimedean")
       .on("end", draw);
 
     // Draw the word cloud
@@ -48,19 +50,18 @@ const WordCloud = ({ wordFrequencies, currentTopic }) => {
         .attr("transform", "translate(300,150)");
 
       // Color scale - using a more readable color scheme
-      const color = d3.scaleOrdinal()
-        .range([
-          "#1f77b4", // blue
-          "#ff7f0e", // orange
-          "#2ca02c", // green
-          "#d62728", // red
-          "#9467bd", // purple
-          "#8c564b", // brown
-          "#e377c2", // pink
-          "#7f7f7f", // gray
-          "#bcbd22", // yellow-green
-          "#17becf"  // cyan
-        ]);
+      const color = d3.scaleOrdinal().range([
+        "#1f77b4", // blue
+        "#ff7f0e", // orange
+        "#2ca02c", // green
+        "#d62728", // red
+        "#9467bd", // purple
+        "#8c564b", // brown
+        "#e377c2", // pink
+        "#7f7f7f", // gray
+        "#bcbd22", // yellow-green
+        "#17becf", // cyan
+      ]);
 
       svg
         .selectAll("text")
@@ -86,17 +87,23 @@ const WordCloud = ({ wordFrequencies, currentTopic }) => {
 
   return (
     <div className="word-cloud-container">
-      <h3 style={{ 
-        marginBottom: '10px',
-        marginTop: '0px',
-        textAlign: 'center',
-        color: '#333',
-        fontSize: '16px'
-      }}>Trending Words for "{currentTopic.toUpperCase()}"</h3>
-      <div style={{ 
-        height: "200px",
-        width: "100%",
-      }}>
+      <h3
+        style={{
+          marginBottom: "10px",
+          marginTop: "0px",
+          textAlign: "center",
+          color: "#000",
+          fontSize: "16px",
+        }}
+      >
+        Trending Words for "{currentTopic.toUpperCase()}"
+      </h3>
+      <div
+        style={{
+          height: "250px", // Increased from 200px to 250px
+          width: "100%",
+        }}
+      >
         <svg ref={svgRef} style={{ width: "100%", height: "100%" }}></svg>
       </div>
     </div>

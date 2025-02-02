@@ -4,6 +4,8 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  position: relative;
+  z-index: 2;
 }
 
 .article-table-wrapper {
@@ -14,6 +16,7 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
+  position: static;
 }
 
 .article-table th {
@@ -73,7 +76,7 @@
 /* Add width constraints for columns */
 .article-table th:first-child,
 .article-table td:first-child {
-  width: 20%;
+  width: 15%;
 }
 
 .article-table th:last-child,
@@ -84,5 +87,83 @@
 
 .article-table th:nth-child(2),
 .article-table td:nth-child(2) {
-  width: 65%;
+  width: 50%;
+}
+
+.article-table th:nth-child(3),
+.article-table td:nth-child(3) {
+  width: 20%;
+}
+
+.sentiment-scores {
+  font-size: 12px;
+  text-align: center;
+  color: #666;
+}
+
+.sentiment-scores span {
+  cursor: help;
+}
+
+.sentiment-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #6c757d;
+  color: white;
+  font-size: 12px;
+  font-style: italic;
+  cursor: help;
+  margin-left: 4px;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 300px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 10px;
+  position: fixed;
+  z-index: 9999;
+  transform: translate(-50%, -100%);
+  margin-top: -10px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px;
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+.tooltip .tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }

@@ -1,7 +1,7 @@
 // src/components/MessageForm.js
 import React, { useState } from "react";
 
-const MessageForm = ({ onSendMessage, isLoading }) => {
+const MessageForm = ({ onSendMessage, isLoading, onReset }) => {
   const [message, setMessage] = useState("");
 
   const handleSubmit = (e) => {
@@ -13,7 +13,7 @@ const MessageForm = ({ onSendMessage, isLoading }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="message-form">
+    <form className="message-form" onSubmit={handleSubmit}>
       <input
         type="text"
         value={message}
@@ -21,16 +21,26 @@ const MessageForm = ({ onSendMessage, isLoading }) => {
         placeholder={
           isLoading ? "Processing..." : "Enter your message or topic..."
         }
-        disabled={isLoading}
         className="message-input"
+        disabled={isLoading}
       />
-      <button
-        type="submit"
-        disabled={isLoading || !message.trim()}
-        className="send-button"
-      >
-        Send
-      </button>
+      <div className="buttons-container">
+        <button
+          type="button"
+          onClick={onReset}
+          className="reset-button"
+          disabled={isLoading}
+        >
+          New Topic
+        </button>
+        <button
+          type="submit"
+          className="send-button"
+          disabled={isLoading || !message.trim()}
+        >
+          Send
+        </button>
+      </div>
     </form>
   );
 };

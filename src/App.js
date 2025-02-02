@@ -7,6 +7,7 @@ import SignOut from "./components/SignOut";
 import SourcesPieChart from "./components/SourcesPieChart";
 import WordCloud from "./components/WordCloud";
 import ArticleTable from "./components/ArticleTable";
+import SentimentBarChart from "./components/SentimentBarChart";
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -25,8 +26,8 @@ function App() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat",
-        "http://localhost:8000/api/chat",
+        "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat",
+        // "http://localhost:8000/api/chat",
         {
           method: "POST",
           headers: {
@@ -74,8 +75,8 @@ function App() {
     setIsLoading(true);
     try {
       await fetch(
-        // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/reset",
-        "http://localhost:8000/api/chat",
+        "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/reset",
+        // "http://localhost:8000/api/chat",
         {
           method: "POST",
           headers: {
@@ -107,20 +108,7 @@ function App() {
     <div className="App">
       <header className="app-header">
         <h1>7-bit News</h1>
-        {user ? (
-          <>
-            <button
-              onClick={handleReset}
-              className="reset-button"
-              disabled={isLoading}
-            >
-              New Topic
-            </button>
-            <SignOut setUser={setUser} />
-          </>
-        ) : (
-          <SignIn setUser={setUser} />
-        )}
+        {user ? <SignOut setUser={setUser} /> : <SignIn setUser={setUser} />}
       </header>
       {user ? (
         <>
@@ -139,20 +127,29 @@ function App() {
             <div className="articles-section">
               <ArticleTable articles={articles} currentTopic={currentTopic} />
             </div>
-            <div className="visualizations-section">
-              <div className="visualization-container">
-                <SourcesPieChart
-                  sourceCounts={sourceCounts}
-                  currentTopic={currentTopic}
-                />
+            {(Object.keys(sourceCounts).length > 0 ||
+              Object.keys(wordFrequencies).length > 0) && (
+              <div className="visualizations-section">
+                <div className="visualization-container">
+                  <SourcesPieChart
+                    sourceCounts={sourceCounts}
+                    currentTopic={currentTopic}
+                  />
+                </div>
+                <div className="visualization-container">
+                  <WordCloud
+                    wordFrequencies={wordFrequencies}
+                    currentTopic={currentTopic}
+                  />
+                </div>
+                <div className="visualization-container">
+                  <SentimentBarChart
+                    articles={articles}
+                    currentTopic={currentTopic}
+                  />
+                </div>
               </div>
-              <div className="visualization-container">
-                <WordCloud
-                  wordFrequencies={wordFrequencies}
-                  currentTopic={currentTopic}
-                />
-              </div>
-            </div>
+            )}
             <div className="chat-section">
               <div className="chat-container">
                 <div className="messages-container">
@@ -181,6 +178,7 @@ function App() {
                 <MessageForm
                   onSendMessage={handleSendMessage}
                   isLoading={isLoading}
+                  onReset={handleReset}
                 />
               </div>
             </div>

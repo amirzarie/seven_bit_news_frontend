@@ -53,12 +53,12 @@ const ArticleTable = ({ articles, currentTopic }) => {
     const leaningOrder = { left: 1, center: 2, right: 3, other: 4 };
     const leaningA = getSourceLeaning(a.source);
     const leaningB = getSourceLeaning(b.source);
-    
+
     // First sort by political leaning
     if (leaningA !== leaningB) {
       return leaningOrder[leaningA] - leaningOrder[leaningB];
     }
-    
+
     // If same leaning, sort alphabetically by source
     return a.source.localeCompare(b.source);
   });
@@ -70,7 +70,7 @@ const ArticleTable = ({ articles, currentTopic }) => {
           marginBottom: "15px",
           marginTop: "0px",
           textAlign: "center",
-          color: "#333",
+          color: "#000",
           fontSize: "16px",
         }}
       >
@@ -82,6 +82,24 @@ const ArticleTable = ({ articles, currentTopic }) => {
             <tr>
               <th>Source</th>
               <th>Title</th>
+              <th>
+                <div className="sentiment-header">
+                  Sentiment
+                  <div className="tooltip">
+                    <span className="info-icon">i</span>
+                    <span className="tooltip-text">
+                      <strong>Polarity (P):</strong> measures the emotional
+                      sentiment of the article, ranging from -1 (negative) to +1
+                      (positive)
+                      <br />
+                      <br />
+                      <strong>Subjectivity (S):</strong> measures the degree of
+                      personal opinion or factuality of the article, ranging
+                      from 0 (objective) to 1 (subjective)
+                    </span>
+                  </div>
+                </div>
+              </th>
               <th>Link</th>
             </tr>
           </thead>
@@ -92,6 +110,17 @@ const ArticleTable = ({ articles, currentTopic }) => {
                   {article.source}
                 </td>
                 <td>{article.title}</td>
+                <td>
+                  <div className="sentiment-scores">
+                    <span title="Polarity (-1 negative to 1 positive)">
+                      P: {article.sentiment.polarity}
+                    </span>
+                    <br />
+                    <span title="Subjectivity (0 objective to 1 subjective)">
+                      S: {article.sentiment.subjectivity}
+                    </span>
+                  </div>
+                </td>
                 <td>
                   <a
                     href={article.url}
