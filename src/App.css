@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px;  /* Explicitly set height */
+  height: 50px; /* Explicitly set height */
   background-color: #007bff;
   color: white;
   display: flex;
@@ -37,17 +37,40 @@
 }
 
 .content-container {
-  position: relative;
-  z-index: 1;
   display: flex;
-  gap: 40px;
+  gap: 40px; /* Increased from 20px */
   margin-top: 20px;
   padding: 20px;
+  max-width: 1800px; /* Increased from 1200px */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.chat-section,
+.visualizations-section,
+.articles-section {
+  margin-top: 0;
 }
 
 .chat-section {
-  flex: 2;
-  min-width: 0; /* Prevents flex item from overflowing */
+  flex: 3; /* Increased from 2 */
+  min-width: 400px; /* Increased from 300px */
+  max-width: 600px; /* Increased from 500px */
+}
+
+.visualizations-section {
+  flex: 3; /* Increased from 2 */
+  min-width: 400px; /* Increased from 300px */
+  max-width: 600px; /* Increased from 400px */
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.articles-section {
+  flex: 4; /* Increased from 3 */
+  min-width: 500px; /* Increased from 400px */
+  max-width: 800px; /* Increased from 600px */
 }
 
 .stats-section {
@@ -170,7 +193,7 @@
 }
 
 .App {
-  max-width: 1200px;
+  max-width: 1800px; /* Increased from 1200px */
   margin: 0 auto;
   padding: 20px;
 }
@@ -261,32 +284,28 @@
 }
 
 /* Add responsive styles */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
   .content-container {
-    flex-direction: column; /* Stack elements vertically on mobile */
-    gap: 20px; /* Reduce gap on mobile */
+    flex-direction: column;
   }
 
-  .stats-section {
-    order: -1; /* Move stats section to top on mobile */
-    max-width: 100%; /* Full width on mobile */
-    min-width: 0;
+  .articles-section {
+    order: 2; /* Show articles after visualizations */
+  }
+
+  .visualizations-section {
+    order: 1; /* Show visualizations first */
   }
 
   .chat-section {
+    order: 3; /* Show chat last */
+  }
+
+  .chat-section,
+  .visualizations-section,
+  .articles-section {
+    max-width: 100%;
     width: 100%;
-  }
-
-  .pie-chart-container {
-    max-height: 300px; /* Limit height on mobile */
-  }
-
-  .chat-container {
-    height: calc(100vh - 400px); /* Adjust height to account for pie chart */
-  }
-
-  .word-cloud-container {
-    height: 300px;
   }
 }
 
@@ -319,6 +338,7 @@
 }
 
 .visualization-container {
+  margin-top: 0; /* Ensure no top margin on visualization containers */
   background: white;
   padding: 20px;
   border-radius: 8px;
@@ -327,8 +347,8 @@
 
 .current-topic {
   position: sticky;
-  top: 60px;  /* Height of the header banner plus a small gap */
-  z-index: 900;  /* Below the header (z-index: 1000) but above other content */
+  top: 60px; /* Height of the header banner plus a small gap */
+  z-index: 900; /* Below the header (z-index: 1000) but above other content */
   width: 100%;
   max-width: 800px;
   margin: 0 auto 20px auto;
@@ -336,7 +356,7 @@
   background: #ffffff;
   border: 1px solid #e9ecef;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .topic-content {
@@ -362,11 +382,18 @@
   border-radius: 4px;
 }
 
-.visualizations-section {
-  flex: 1;
-  min-width: 300px;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;  /* Increased from 20px to create more space between visualizations */
+/* Update article table container styles */
+.article-table-container {
+  margin-top: 0; /* Remove top margin */
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Remove the extra container around ArticleTable */
+.articles-section .visualization-container {
+  background: none;
+  padding: 0;
+  box-shadow: none;
 }

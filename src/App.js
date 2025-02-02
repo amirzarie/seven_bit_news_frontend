@@ -6,6 +6,7 @@ import SignIn from "./components/SignIn";
 import SignOut from "./components/SignOut";
 import SourcesPieChart from "./components/SourcesPieChart";
 import WordCloud from "./components/WordCloud";
+import ArticleTable from "./components/ArticleTable";
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -18,13 +19,14 @@ function App() {
   const [sourceCounts, setSourceCounts] = useState({});
   const [wordFrequencies, setWordFrequencies] = useState({});
   const [currentTopic, setCurrentTopic] = useState("");
+  const [articles, setArticles] = useState([]);
 
   const handleSendMessage = async (message) => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat",
-        // "http://localhost:8000/api/chat",
+        // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat",
+        "http://localhost:8000/api/chat",
         {
           method: "POST",
           headers: {
@@ -53,6 +55,9 @@ function App() {
       if (data.word_frequencies) {
         setWordFrequencies(data.word_frequencies);
       }
+      if (data.articles) {
+        setArticles(data.articles);
+      }
     } catch (error) {
       console.error("Error:", error);
       // Add error message to chat
@@ -69,8 +74,8 @@ function App() {
     setIsLoading(true);
     try {
       await fetch(
-        "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/reset",
-        // "http://localhost:8000/api/chat",
+        // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/reset",
+        "http://localhost:8000/api/chat",
         {
           method: "POST",
           headers: {
@@ -82,6 +87,7 @@ function App() {
       setSourceCounts({});
       setWordFrequencies({});
       setCurrentTopic("");
+      setArticles([]);
     } catch (error) {
       console.error("Error resetting chat:", error);
     } finally {
@@ -123,11 +129,30 @@ function App() {
             <div className="current-topic">
               <div className="topic-content">
                 <span className="topic-label">Current Topic:</span>
-                <span className="topic-text">"{currentTopic.toUpperCase()}"</span>
+                <span className="topic-text">
+                  "{currentTopic.toUpperCase()}"
+                </span>
               </div>
             </div>
           )}
           <div className="content-container">
+            <div className="articles-section">
+              <ArticleTable articles={articles} currentTopic={currentTopic} />
+            </div>
+            <div className="visualizations-section">
+              <div className="visualization-container">
+                <SourcesPieChart
+                  sourceCounts={sourceCounts}
+                  currentTopic={currentTopic}
+                />
+              </div>
+              <div className="visualization-container">
+                <WordCloud
+                  wordFrequencies={wordFrequencies}
+                  currentTopic={currentTopic}
+                />
+              </div>
+            </div>
             <div className="chat-section">
               <div className="chat-container">
                 <div className="messages-container">
@@ -156,20 +181,6 @@ function App() {
                 <MessageForm
                   onSendMessage={handleSendMessage}
                   isLoading={isLoading}
-                />
-              </div>
-            </div>
-            <div className="visualizations-section">
-              <div className="visualization-container">
-                <SourcesPieChart 
-                  sourceCounts={sourceCounts} 
-                  currentTopic={currentTopic}
-                />
-              </div>
-              <div className="visualization-container">
-                <WordCloud 
-                  wordFrequencies={wordFrequencies} 
-                  currentTopic={currentTopic}
                 />
               </div>
             </div>
