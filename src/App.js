@@ -31,8 +31,8 @@ function App() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat",
-        "http://localhost:8000/api/chat",
+        "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat",
+        // "http://localhost:8000/api/chat",
         {
           method: "POST",
           headers: {
@@ -82,8 +82,8 @@ function App() {
   const handleReset = async () => {
     setIsLoading(true);
     try {
-      // await fetch("https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat", {
-      await fetch("http://localhost:8000/api/chat", {
+      await fetch("https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat", {
+      // await fetch("http://localhost:8000/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -122,8 +122,8 @@ function App() {
 
   const fetchTrendingNews = async () => {
     try {
-      // const response = await fetch("https://backend-dot-seven-bit-news.nn.r.appspot.com/api/trending");
-      const response = await fetch("http://localhost:8000/api/trending");
+      const response = await fetch("https://backend-dot-seven-bit-news.nn.r.appspot.com/api/trending");
+      // const response = await fetch("http://localhost:8000/api/trending");
       const data = await response.json();
       setTrendingNews(data.trending_articles);
     } catch (error) {
@@ -141,8 +141,8 @@ function App() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/topic",
-        "http://localhost:8000/api/topic",
+        "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/topic",
+        // "http://localhost:8000/api/topic",
         {
           method: "POST",
           headers: {
