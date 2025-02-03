@@ -8,7 +8,8 @@ import SourcesPieChart from "./components/SourcesPieChart";
 import WordCloud from "./components/WordCloud";
 import ArticleTable from "./components/ArticleTable";
 import SentimentBarChart from "./components/SentimentBarChart";
-import TrendingNews from "./components/TrendingNews";
+import TrendingNewsMenu from "./components/TrendingNewsMenu";
+import LocationChart from "./components/LocationChart";
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -23,6 +24,8 @@ function App() {
   const [currentTopic, setCurrentTopic] = useState("");
   const [articles, setArticles] = useState([]);
   const [trendingNews, setTrendingNews] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [topicInput, setTopicInput] = useState("");
 
   const handleSendMessage = async (message) => {
     setIsLoading(true);
@@ -61,6 +64,9 @@ function App() {
       if (data.articles) {
         setArticles(data.articles);
       }
+      if (data.locations) {
+        setLocations(data.locations);
+      }
     } catch (error) {
       console.error("Error:", error);
       // Add error message to chat
@@ -76,21 +82,24 @@ function App() {
   const handleReset = async () => {
     setIsLoading(true);
     try {
-      await fetch(
-        // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/reset",
-        "http://localhost:8000/api/chat",
-        {
-          method: "POST",
-          headers: {
-            "X-User-ID": userId,
-          },
-        }
-      );
+      // await fetch("https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat", {
+      await fetch("http://localhost:8000/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-User-ID": userId,
+        },
+        body: JSON.stringify({
+          message: "",
+          chat_history: [],
+        }),
+      });
       setMessages([]);
       setSourceCounts({});
       setWordFrequencies({});
       setCurrentTopic("");
       setArticles([]);
+      setLocations([]);
     } catch (error) {
       console.error("Error resetting chat:", error);
     } finally {
@@ -99,7 +108,12 @@ function App() {
   };
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current) {
+      const messagesContainer = document.querySelector(".messages-container");
+      if (messagesContainer) {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+    }
   };
 
   useEffect(() => {
@@ -123,16 +137,78 @@ function App() {
     }
   }, [user]);
 
+  const handleTopicSelect = async (topic) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/topic",
+        "http://localhost:8000/api/topic",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-User-ID": userId,
+          },
+          body: JSON.stringify({
+            topic: topic,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      setCurrentTopic(topic);
+      setSourceCounts(data.source_counts);
+      setWordFrequencies(data.word_frequencies);
+      setArticles(data.articles);
+      setLocations(data.locations);
+      // Update messages with the initial summary from the backend
+      if (data.chat_history) {
+        setMessages(data.chat_history);
+      } else if (data.initial_summary) {
+        // Fallback in case chat_history isn't provided
+        setMessages([{ role: "assistant", content: data.initial_summary }]);
+      } else {
+        setMessages([]); // Clear messages if no summary provided
+      }
+    } catch (error) {
+      console.error("Error setting topic:", error);
+      setMessages([
+        { role: "system", content: "Error: Could not process your request." },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleTopicSubmit = (e) => {
+    e.preventDefault();
+    if (topicInput.trim()) {
+      handleTopicSelect(topicInput);
+      setTopicInput("");
+    }
+  };
+
   return (
     <div className="App">
       <header className="app-header">
+        <div className="header-left">
+          {user && <TrendingNewsMenu articles={trendingNews} />}
+        </div>
         <h1>7-bit News</h1>
-        {user ? <SignOut setUser={setUser} /> : <SignIn setUser={setUser} />}
+        <div className="header-right">
+          {user && (
+            <span className="user-info">Signed in as: {user.displayName}</span>
+          )}
+          {user ? <SignOut setUser={setUser} /> : <SignIn setUser={setUser} />}
+        </div>
       </header>
       {user ? (
         <>
-          <p>Signed in as: {user.displayName}</p>
-          {currentTopic && (
+          {currentTopic ? (
             <div className="current-topic">
               <div className="topic-content">
                 <span className="topic-label">Current Topic:</span>
@@ -141,32 +217,67 @@ function App() {
                 </span>
               </div>
             </div>
+          ) : (
+            <div className="topic-input-container">
+              <form onSubmit={handleTopicSubmit} className="topic-form">
+                <input
+                  type="text"
+                  value={topicInput}
+                  onChange={(e) => setTopicInput(e.target.value)}
+                  placeholder="Enter a topic..."
+                  className="topic-input"
+                />
+                <button
+                  type="submit"
+                  className="topic-submit-btn"
+                  disabled={isLoading || !topicInput.trim()}
+                >
+                  Search Topic
+                </button>
+              </form>
+            </div>
           )}
           <div className="content-container">
             <div className="articles-section">
               <ArticleTable articles={articles} currentTopic={currentTopic} />
+              {locations &&
+                locations.cities &&
+                locations.countries &&
+                (locations.cities.length > 0 ||
+                  locations.countries.length > 0) && (
+                  <LocationChart
+                    locations={locations}
+                    currentTopic={currentTopic}
+                  />
+                )}
             </div>
             {(Object.keys(sourceCounts).length > 0 ||
               Object.keys(wordFrequencies).length > 0) && (
               <div className="visualizations-section">
-                <div className="visualization-container">
-                  <SourcesPieChart
-                    sourceCounts={sourceCounts}
-                    currentTopic={currentTopic}
-                  />
-                </div>
-                <div className="visualization-container">
-                  <WordCloud
-                    wordFrequencies={wordFrequencies}
-                    currentTopic={currentTopic}
-                  />
-                </div>
-                <div className="visualization-container">
-                  <SentimentBarChart
-                    articles={articles}
-                    currentTopic={currentTopic}
-                  />
-                </div>
+                {Object.keys(sourceCounts).length > 0 && (
+                  <div className="visualization-container">
+                    <SourcesPieChart
+                      sourceCounts={sourceCounts}
+                      currentTopic={currentTopic}
+                    />
+                  </div>
+                )}
+                {articles.length > 0 && (
+                  <div className="visualization-container">
+                    <SentimentBarChart
+                      articles={articles}
+                      currentTopic={currentTopic}
+                    />
+                  </div>
+                )}
+                {Object.keys(wordFrequencies).length > 0 && (
+                  <div className="visualization-container">
+                    <WordCloud
+                      wordFrequencies={wordFrequencies}
+                      currentTopic={currentTopic}
+                    />
+                  </div>
+                )}
               </div>
             )}
             <div className="chat-section">
@@ -202,7 +313,6 @@ function App() {
               </div>
             </div>
           </div>
-          <TrendingNews articles={trendingNews} />
         </>
       ) : (
         <p>Please sign in to start chatting.</p>

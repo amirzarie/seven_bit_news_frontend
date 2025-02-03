@@ -4,31 +4,34 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px; /* Explicitly set height */
+  height: 60px; /* Increased to match trending menu header */
   background-color: #000;
   color: white;
   display: flex;
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
-  padding: 10px 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  box-sizing: border-box;
 }
 
 .app-header h1 {
-  margin-right: 20px; /* Add spacing between the title and the button */
+  margin: 0; /* Remove margin-right */
   font-size: 24px;
+  flex: 1; /* Allow title to take up remaining space */
+  text-align: center; /* Center the title */
 }
 
 .app-header button {
   background-color: white;
   color: #000;
   border: 1px solid #000;
-  padding: 8px 20px;  /* Increased padding */
+  padding: 8px 20px; /* Increased padding */
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  font-size: 16px;  /* Increased font size */
+  font-size: 16px; /* Increased font size */
 }
 
 .app-header button:hover {
@@ -38,13 +41,14 @@
 
 .content-container {
   display: grid;
-  grid-template-columns: 4fr 3fr 3fr;  /* Articles | Visualizations | Chat */
-  gap: 25px;  /* Reduced from 40px */
-  margin-top: 15px;  /* Reduced from 20px */
-  padding: 15px;  /* Reduced from 20px */
+  grid-template-columns: 5fr 3fr 3fr;
+  gap: 25px;
+  margin-top: 80px;
+  padding: 15px;
   max-width: 1800px;
   margin-left: auto;
   margin-right: auto;
+  align-items: start; /* Align items to the top */
 }
 
 .chat-section,
@@ -55,17 +59,22 @@
 
 .chat-section {
   grid-column: 3;
+  height: 100%;
 }
 
 .visualizations-section {
   grid-column: 2;
   display: flex;
   flex-direction: column;
-  gap: 20px;  /* Reduced from 30px */
+  gap: 25px;
 }
 
 .articles-section {
   grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
 }
 
 .stats-section {
@@ -83,17 +92,17 @@
 
 .pie-chart-container {
   width: 100%;
-  height: 300px;  /* Set a fixed height */
+  height: 300px; /* Set a fixed height */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  margin-bottom: 15px;  /* Reduced from implicit larger margin */
+  margin-bottom: 15px; /* Reduced from implicit larger margin */
 }
 
 .pie-chart-wrapper {
   width: 90%;
-  max-width: 300px;  /* Limit maximum width */
+  max-width: 300px; /* Limit maximum width */
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -115,16 +124,13 @@
 }
 
 .chat-container {
-  width: 100%;
-  height: calc(100vh - 150px);
-  margin: 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #f9f9f9;
+  height: calc(100vh - 200px);
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;  /* Add this to include padding in width calculation */
 }
 
 .messages-container {
@@ -149,8 +155,8 @@
 }
 
 .assistant-message {
-  background-color: #f0f0f0;  /* Changed back to original grey */
-  color: #333;  /* Changed back to dark grey text */
+  background-color: #f0f0f0; /* Changed back to original grey */
+  color: #333; /* Changed back to dark grey text */
   margin-right: auto;
 }
 
@@ -161,7 +167,7 @@
   padding: 10px;
   gap: 10px;
   border-top: 1px solid #eee;
-  box-sizing: border-box;  /* Add this to include padding in width calculation */
+  box-sizing: border-box; /* Add this to include padding in width calculation */
 }
 
 .message-input {
@@ -170,14 +176,14 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
-  box-sizing: border-box;  /* Add this to include padding in width calculation */
+  box-sizing: border-box; /* Add this to include padding in width calculation */
 }
 
 .buttons-container {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  box-sizing: border-box;  /* Add this to include padding in width calculation */
+  box-sizing: border-box; /* Add this to include padding in width calculation */
 }
 
 .reset-button {
@@ -246,31 +252,27 @@
 /* Update responsive styles */
 @media screen and (max-width: 1200px) {
   .content-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;  /* Reduced gap in mobile view */
+    grid-template-columns: 1fr;
   }
 
-  .articles-section {
-    order: 2;
-  }
-
-  .visualizations-section {
-    order: 1;
-  }
-
+  .articles-section,
+  .visualizations-section,
   .chat-section {
-    order: 3;
+    grid-column: 1;
+  }
+
+  .map-and-wordcloud {
+    grid-template-columns: 1fr;
   }
 
   /* Adjust heights for mobile */
   .chat-container,
   .article-table-container {
-    height: 600px;  /* Fixed height for mobile */
+    height: 600px; /* Fixed height for mobile */
   }
 
   .chat-messages {
-    max-height: 500px;  /* Adjusted for mobile */
+    max-height: 500px; /* Adjusted for mobile */
   }
 
   .article-table-container {
@@ -300,6 +302,18 @@
   .word-cloud-container {
     height: 250px;
   }
+
+  .app-header h1 {
+    font-size: 20px;
+  }
+  
+  .menu-text {
+    display: none;
+  }
+
+  .user-info {
+    display: none; /* Hide user info on very small screens */
+  }
 }
 
 .word-cloud-container {
@@ -308,19 +322,20 @@
 }
 
 .visualization-container {
-  margin-top: 0;
   background: white;
-  padding: 15px;  /* Reduced from 20px */
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .current-topic {
   position: sticky;
-  top: 60px;
+  top: 80px; /* Increased from 60px */
   z-index: 900;
   width: 100%;
-  max-width: 250px;  /* Reduced from 300px to 250px */
+  max-width: 250px;
   margin: 0 auto 20px auto;
   padding: 8px 12px;
   background: #ffffff;
@@ -338,45 +353,122 @@
 
 .topic-label {
   color: #6c757d;
-  font-size: 15px;  /* Back to original size */
+  font-size: 15px; /* Back to original size */
   font-weight: 400;
 }
 
 .topic-text {
   color: #2c3e50;
-  font-size: 18px;  /* Back to original size */
+  font-size: 18px; /* Back to original size */
   font-weight: 500;
   letter-spacing: 0.3px;
-  padding: 2px 8px;  /* Back to original padding */
+  padding: 2px 8px; /* Back to original padding */
   background: #f8f9fa;
   border-radius: 4px;
 }
 
 /* Update article table container styles */
 .article-table-container {
-  margin-top: 0;
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 15px;
-  min-height: 200px;  /* Minimum height instead of fixed height */
-  max-height: calc(100vh - 150px);  /* Maximum height */
+  width: 100%;
+  box-sizing: border-box;
+  height: 500px;
   overflow-y: auto;
 }
 
 .article-table-wrapper {
   overflow-x: auto;
-  margin-bottom: 0;  /* Remove bottom margin */
-}
-
-/* Remove the extra container around ArticleTable */
-.articles-section .visualization-container {
-  background: none;
-  padding: 0;
-  box-shadow: none;
+  margin-bottom: 0; /* Remove bottom margin */
 }
 
 /* Update tooltip z-index to be higher than current-topic */
 .tooltip .tooltip-text {
-  z-index: 99999;  /* Increased from 9999 to be above current-topic */
+  z-index: 99999; /* Increased from 9999 to be above current-topic */
+}
+
+.topic-input-container {
+  position: sticky;
+  top: 80px; /* Increased from 60px */
+  z-index: 900;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 20px auto;
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.topic-form {
+  display: flex;
+  gap: 10px;
+}
+
+.topic-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+}
+
+.topic-input:focus {
+  border-color: #000;
+}
+
+.topic-submit-btn {
+  padding: 8px 16px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.topic-submit-btn:hover {
+  background-color: #333;
+}
+
+.topic-submit-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  min-width: 150px; /* Reserve space for the hamburger menu */
+}
+
+/* Add this new class */
+.header-right {
+  display: flex;
+  align-items: center;
+  min-width: 150px;
+  justify-content: flex-end;
+  gap: 15px; /* Add space between user info and sign out button */
+}
+
+.user-info {
+  color: #fff;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Remove any bottom margin from the last visualization in each section */
+.articles-section > div:last-child,
+.visualizations-section > div:last-child {
+  margin-bottom: 0;
+}
+
+/* Remove any margins that might affect alignment */
+.articles-section > * {
+  margin: 0;
 }

@@ -1,0 +1,113 @@
+.trending-menu {
+  position: relative;
+}
+
+.hamburger-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px 12px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.hamburger-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.hamburger-icon {
+  font-size: 20px;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+.trending-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 75%;
+  max-width: 1200px;
+  background-color: white;
+  z-index: 999;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.trending-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px; /* Match app header height */
+  border-bottom: 1px solid #eee;
+  background-color: #000;
+  color: white;
+}
+
+.trending-sidebar-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0 8px;
+}
+
+.close-button:hover {
+  color: #ccc;
+}
+
+.trending-sidebar-content {
+  padding: 20px;
+}
+
+/* Adjust TrendingNews styles when in sidebar */
+.trending-sidebar .trending-grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1200px) {
+  .trending-sidebar .trending-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .trending-sidebar {
+    width: 100%;
+  }
+
+  .trending-sidebar .trending-grid {
+    grid-template-columns: 1fr;
+  }
+}
