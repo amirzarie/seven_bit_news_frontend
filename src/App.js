@@ -8,6 +8,7 @@ import SourcesPieChart from "./components/SourcesPieChart";
 import WordCloud from "./components/WordCloud";
 import ArticleTable from "./components/ArticleTable";
 import SentimentBarChart from "./components/SentimentBarChart";
+import TrendingNews from "./components/TrendingNews";
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -21,13 +22,14 @@ function App() {
   const [wordFrequencies, setWordFrequencies] = useState({});
   const [currentTopic, setCurrentTopic] = useState("");
   const [articles, setArticles] = useState([]);
+  const [trendingNews, setTrendingNews] = useState([]);
 
   const handleSendMessage = async (message) => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat",
-        // "http://localhost:8000/api/chat",
+        // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat",
+        "http://localhost:8000/api/chat",
         {
           method: "POST",
           headers: {
@@ -75,8 +77,8 @@ function App() {
     setIsLoading(true);
     try {
       await fetch(
-        "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/reset",
-        // "http://localhost:8000/api/chat",
+        // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/reset",
+        "http://localhost:8000/api/chat",
         {
           method: "POST",
           headers: {
@@ -103,6 +105,23 @@ function App() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  const fetchTrendingNews = async () => {
+    try {
+      // const response = await fetch("https://backend-dot-seven-bit-news.nn.r.appspot.com/api/trending");
+      const response = await fetch("http://localhost:8000/api/trending");
+      const data = await response.json();
+      setTrendingNews(data.trending_articles);
+    } catch (error) {
+      console.error("Error fetching trending news:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      fetchTrendingNews();
+    }
+  }, [user]);
 
   return (
     <div className="App">
@@ -183,6 +202,7 @@ function App() {
               </div>
             </div>
           </div>
+          <TrendingNews articles={trendingNews} />
         </>
       ) : (
         <p>Please sign in to start chatting.</p>
