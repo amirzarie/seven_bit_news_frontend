@@ -43,7 +43,7 @@
   display: grid;
   grid-template-columns: 5fr 3fr 3fr;
   gap: 25px;
-  margin-top: 80px;
+  margin-top: 60px; /* Reduced from 80px */
   padding: 15px;
   max-width: 1800px;
   margin-left: auto;
@@ -124,7 +124,7 @@
 }
 
 .chat-container {
-  height: calc(100vh - 200px);
+  height: calc(100vh - 225px); /* Increased from -200px to make it shorter */
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -281,7 +281,7 @@
   }
 }
 
-/* Add styles for very small screens */
+/* Update mobile chat container height */
 @media screen and (max-width: 480px) {
   .content-container {
     padding: 10px;
@@ -292,11 +292,11 @@
   }
 
   .pie-chart-container {
-    max-height: 250px; /* Even smaller height on very small screens */
+    max-height: 250px;
   }
 
   .chat-container {
-    height: calc(100vh - 350px);
+    height: calc(100vh + 125px); /* Increased from -300px to make chat even longer on mobile */
   }
 
   .word-cloud-container {
@@ -312,7 +312,35 @@
   }
 
   .user-info {
-    display: none; /* Hide user info on very small screens */
+    display: none;
+  }
+
+  .current-topic {
+    position: fixed; /* Change from sticky to fixed */
+    top: 60px; /* Align right below the header */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    z-index: 900;
+    width: 90%; /* Adjust width for mobile */
+    max-width: none; /* Remove max-width constraint */
+    margin: 0; /* Remove margins */
+    padding: 8px 12px;
+    background: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+    border-radius: 0 0 8px 8px; /* Round only bottom corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  }
+
+  .topic-content {
+    justify-content: center; /* Ensure content is centered */
+    width: 100%; /* Full width */
+    text-align: center; /* Center text */
+  }
+
+  /* Adjust content container to account for fixed current topic */
+  .content-container {
+    margin-top: 120px; /* Add space for fixed current topic */
+    padding: 10px;
   }
 }
 
@@ -332,11 +360,11 @@
 
 .current-topic {
   position: sticky;
-  top: 80px; /* Increased from 60px */
+  top: 70px; /* Reduced from 80px */
   z-index: 900;
   width: 100%;
   max-width: 250px;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 15px auto; /* Reduced bottom margin from 20px to 15px */
   padding: 8px 12px;
   background: #ffffff;
   border: 1px solid #e9ecef;
@@ -391,11 +419,11 @@
 
 .topic-input-container {
   position: sticky;
-  top: 80px; /* Increased from 60px */
+  top: 70px; /* Reduced from 80px */
   z-index: 900;
   width: 100%;
   max-width: 400px;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 15px auto; /* Reduced bottom margin from 20px to 15px */
   padding: 8px 12px;
   background: #ffffff;
   border: 1px solid #e9ecef;
