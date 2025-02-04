@@ -35,7 +35,7 @@
 }
 
 .app-header button:hover {
-  background-color: #333;
+  background-color: #ff9040; /* Changed from #333 to match "New Topic" orange */
   color: white;
 }
 
@@ -296,7 +296,9 @@
   }
 
   .chat-container {
-    height: calc(100vh + 125px); /* Increased from -300px to make chat even longer on mobile */
+    height: calc(
+      100vh + 125px
+    ); /* Increased from -300px to make chat even longer on mobile */
   }
 
   .word-cloud-container {
@@ -306,7 +308,7 @@
   .app-header h1 {
     font-size: 20px;
   }
-  
+
   .menu-text {
     display: none;
   }
@@ -499,4 +501,16 @@
 /* Remove any margins that might affect alignment */
 .articles-section > * {
   margin: 0;
+}
+
+.banner-button:hover {
+  background-color: #ff9040;
+  color: white;
+}
+
+/* If there are specific classes for these buttons, we can target them directly */
+.sign-out-button:hover,
+.trending-news-button:hover {
+  background-color: #ff9040;
+  color: white;
 }

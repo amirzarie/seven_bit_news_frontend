@@ -10,6 +10,7 @@ import ArticleTable from "./components/ArticleTable";
 import SentimentBarChart from "./components/SentimentBarChart";
 import TrendingNewsMenu from "./components/TrendingNewsMenu";
 import LocationChart from "./components/LocationChart";
+import NetworkGraph from "./components/NetworkGraph";
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -26,15 +27,16 @@ function App() {
   const [trendingNews, setTrendingNews] = useState([]);
   const [locations, setLocations] = useState([]);
   const [topicInput, setTopicInput] = useState("");
+  const [networkData, setNetworkData] = useState(null);
 
   const handleSendMessage = async (message) => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        "https://seven-bit-news-207302804909.northamerica-northeast2.run.app/api/chat",
+        // "https://seven-bit-news-207302804909.northamerica-northeast2.run.app/api/chat",
         // "https://seven-bit-news-cgc35suboa-pd.a.run.app/api/chat",
         // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat",
-        // "http://localhost:8000/api/chat",
+        "http://localhost:8000/api/chat",
         {
           method: "POST",
           headers: {
@@ -69,6 +71,9 @@ function App() {
       if (data.locations) {
         setLocations(data.locations);
       }
+      if (data.network_data) {
+        setNetworkData(data.network_data);
+      }
     } catch (error) {
       console.error("Error:", error);
       // Add error message to chat
@@ -84,10 +89,10 @@ function App() {
   const handleReset = async () => {
     setIsLoading(true);
     try {
-      await fetch("https://seven-bit-news-207302804909.northamerica-northeast2.run.app/api/chat", {
+      // await fetch("https://seven-bit-news-207302804909.northamerica-northeast2.run.app/api/chat", {
       // await fetch("https://seven-bit-news-cgc35suboa-pd.a.run.app/api/chat", {
       // await fetch("https://backend-dot-seven-bit-news.nn.r.appspot.com/api/chat", {
-      // await fetch("http://localhost:8000/api/chat", {
+      await fetch("http://localhost:8000/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,6 +109,7 @@ function App() {
       setCurrentTopic("");
       setArticles([]);
       setLocations([]);
+      setNetworkData(null);
     } catch (error) {
       console.error("Error resetting chat:", error);
     } finally {
@@ -126,10 +132,10 @@ function App() {
 
   const fetchTrendingNews = async () => {
     try {
-      const response = await fetch("https://seven-bit-news-207302804909.northamerica-northeast2.run.app/api/trending");
+      // const response = await fetch("https://seven-bit-news-207302804909.northamerica-northeast2.run.app/api/trending");
       // const response = await fetch("https://seven-bit-news-cgc35suboa-pd.a.run.app/api/trending");
       // const response = await fetch("https://backend-dot-seven-bit-news.nn.r.appspot.com/api/trending");
-      // const response = await fetch("http://localhost:8000/api/trending");
+      const response = await fetch("http://localhost:8000/api/trending");
       const data = await response.json();
       setTrendingNews(data.trending_articles);
     } catch (error) {
@@ -147,10 +153,10 @@ function App() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        "https://seven-bit-news-207302804909.northamerica-northeast2.run.app/api/topic",
+        // "https://seven-bit-news-207302804909.northamerica-northeast2.run.app/api/topic",
         // "https://seven-bit-news-cgc35suboa-pd.a.run.app/api/topic",
         // "https://backend-dot-seven-bit-news.nn.r.appspot.com/api/topic",
-        // "http://localhost:8000/api/topic",
+        "http://localhost:8000/api/topic",
         {
           method: "POST",
           headers: {
@@ -181,6 +187,9 @@ function App() {
         setMessages([{ role: "assistant", content: data.initial_summary }]);
       } else {
         setMessages([]); // Clear messages if no summary provided
+      }
+      if (data.network_data) {
+        setNetworkData(data.network_data);
       }
     } catch (error) {
       console.error("Error setting topic:", error);
@@ -286,6 +295,14 @@ function App() {
                     />
                   </div>
                 )}
+                {networkData &&
+                  networkData.nodes &&
+                  networkData.nodes.length > 0 && (
+                    <NetworkGraph
+                      networkData={networkData}
+                      currentTopic={currentTopic}
+                    />
+                  )}
               </div>
             )}
             <div className="chat-section">
