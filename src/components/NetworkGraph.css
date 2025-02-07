@@ -9,17 +9,18 @@
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 10px;
 }
 
 .graph-title {
-  margin: 0 0 15px 0;
-  text-align: center;
-  color: #000;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 1.2rem;
+  margin: 0;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
 .graph-wrapper {
@@ -51,6 +52,7 @@
 }
 
 .graph-header {
+  width: 100%;
   text-align: center;
   margin-bottom: 15px;
 }
@@ -124,3 +126,41 @@
   border-style: solid;
   border-color: transparent transparent #333 transparent;
 }
+
+/* Media query for mobile screens */
+@media screen and (max-width: 600px) {
+  .graph-title {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+  
+  .graph-wrapper {
+    width: 100%;
+    overflow: hidden;
+  }
+}
+/* Remove the previously added media query */
+@media screen and (max-width: 768px) {
+  .current-topic-container {
+    /* Remove these styles */
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 90%;
+    max-width: 300px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px auto;
+  }
+}
+
+.current-topic-container input {
+    width: 400px;  /* Increased width for the topic input */
+    padding: 5px;
+    margin-right: 10px;
+}
+

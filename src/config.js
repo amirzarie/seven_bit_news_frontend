@@ -1,6 +1,6 @@
 // Base URLs for different environments
 const PROD_URL = "https://seven-bit-news-api.com";
-const DEV_URL = "http://localhost:8000";
+const DEV_URL = "http://127.0.0.1:8000";
 
 // Set the base URL based on environment
 export const BASE_URL =

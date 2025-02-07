@@ -1,7 +1,7 @@
 // src/components/MessageForm.js
 import React, { useState } from "react";
 
-const MessageForm = ({ onSendMessage, isLoading, onReset }) => {
+const MessageForm = ({ onSendMessage, isLoading, currentTopic }) => {
   const [message, setMessage] = useState("");
 
   const handleSubmit = (e) => {
@@ -13,30 +13,24 @@ const MessageForm = ({ onSendMessage, isLoading, onReset }) => {
   };
 
   return (
-    <form className="message-form" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder={
-          isLoading ? "Processing..." : "Enter your message or topic..."
-        }
-        className="message-input"
-        disabled={isLoading}
-      />
-      <div className="buttons-container">
-        <button
-          type="button"
-          onClick={onReset}
-          className="reset-button"
-          disabled={isLoading}
-        >
-          New Topic
-        </button>
+    <form onSubmit={handleSubmit} className="message-form">
+      <div className="message-input-container">
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder={
+            currentTopic
+              ? "Type your message..."
+              : "Select a topic to start chatting..."
+          }
+          className="message-input"
+          disabled={isLoading || !currentTopic}
+        />
         <button
           type="submit"
           className="send-button"
-          disabled={isLoading || !message.trim()}
+          disabled={isLoading || !message.trim() || !currentTopic}
         >
           Send
         </button>

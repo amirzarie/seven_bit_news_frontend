@@ -24,29 +24,43 @@ const NetworkGraph = ({ networkData, currentTopic }) => {
     }
   }, []);
 
-  // Stop the simulation and center the graph after initial layout
+  // Modify the useEffect block to handle both initialization and zoom
   useEffect(() => {
-    if (fgRef.current) {
-      // Let it cool down for a bit to get a good initial layout
-      setTimeout(() => {
-        // Stronger centering force for better positioning
-        fgRef.current.d3Force("charge").strength(-200);
-        fgRef.current.d3Force("link").distance(100);
-        fgRef.current.d3Force("center").strength(1);
-        fgRef.current._cooldownTicks = 0;
+    if (fgRef.current && networkData?.nodes?.length > 0) {
+      // Wait for the graph to be properly initialized
+      requestAnimationFrame(() => {
+        if (!fgRef.current) return;
 
-        // Center the graph
-        fgRef.current.zoomToFit(400, 50);
-      }, 2000);
+        // Initial force configuration
+        const fg = fgRef.current;
+        const chargeForce = fg.d3Force("charge");
+        const linkForce = fg.d3Force("link");
+        const centerForce = fg.d3Force("center");
+
+        if (chargeForce) chargeForce.strength(-200);
+        if (linkForce) linkForce.distance(100);
+        if (centerForce) centerForce.strength(1);
+
+        // Let it cool down for a bit to get a good initial layout
+        setTimeout(() => {
+          if (fgRef.current) {
+            try {
+              fgRef.current.zoomToFit(400, 50);
+            } catch (e) {
+              console.warn("Failed to zoom to fit:", e);
+            }
+          }
+        }, 1000); // Increased timeout to give more time for initialization
+      });
     }
-  }, []);
+  }, [networkData]); // Add networkData as dependency
 
   if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
     return null;
   }
 
   const getLinkColor = () => {
-    return "rgba(0, 0, 0, 0.15)"; // Constant transparency for all edges
+    return "rgba(0, 0, 0, 0.08)"; // Reduced from 0.15 to 0.08 for more transparency
   };
 
   const getLinkWidth = (link) => {
@@ -104,12 +118,10 @@ const NetworkGraph = ({ networkData, currentTopic }) => {
           enableZoomPanInteraction={true}
           minZoom={0.5} // Limit minimum zoom out
           maxZoom={4} // Limit maximum zoom in
-          zoomToFit={400} // Initial zoom to fit with padding
-          // Add back the particle effects
           linkDirectionalParticles={2} // Number of particles per edge
           linkDirectionalParticleWidth={2} // Size of particles
           linkDirectionalParticleSpeed={0.005} // Speed of particles
-          linkDirectionalParticleColor={() => "rgba(0, 0, 0, 0.2)"} // Particle color
+          linkDirectionalParticleColor={() => "rgba(0, 0, 0, 0.1)"} // Reduced from 0.2 to 0.1
           nodeCanvasObject={(node, ctx, globalScale) => {
             const label = node.label;
             const baseFontSize = 12;

@@ -42,7 +42,7 @@ const LocationChart = ({ locations, currentTopic }) => {
             layout="vertical"
             margin={{ top: 5, right: 50, left: 70, bottom: 5 }}
           >
-            <XAxis type="number" domain={[0, "dataMax + 10"]} />
+            <XAxis type="number" domain={[0, 'dataMax + 1']} />
             <YAxis
               type="category"
               dataKey="name"

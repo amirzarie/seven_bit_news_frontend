@@ -215,6 +215,14 @@ function App() {
                 <span className="topic-text">
                   "{currentTopic.toUpperCase()}"
                 </span>
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="topic-reset-btn"
+                  disabled={isLoading}
+                >
+                  New Topic
+                </button>
               </div>
             </div>
           ) : (
@@ -233,6 +241,14 @@ function App() {
                   disabled={isLoading || !topicInput.trim()}
                 >
                   Search Topic
+                </button>
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="topic-reset-btn"
+                  disabled={isLoading}
+                >
+                  New Topic
                 </button>
               </form>
             </div>
@@ -288,38 +304,40 @@ function App() {
                   )}
               </div>
             )}
-            <div className="chat-section">
-              <div className="chat-container">
-                <div className="messages-container">
-                  {messages.length === 0 && (
-                    <div className="welcome-message">
-                      Enter a topic to start the conversation
-                    </div>
-                  )}
-                  {messages.map((msg, index) => (
-                    <div
-                      key={index}
-                      className={`message ${
-                        msg.role === "user"
-                          ? "user-message"
-                          : "assistant-message"
-                      }`}
-                    >
-                      <div className="message-content">{msg.content}</div>
-                    </div>
-                  ))}
-                  {isLoading && (
-                    <div className="loading-message">Processing...</div>
-                  )}
-                  <div ref={messagesEndRef} />
+            {currentTopic && (
+              <div className="chat-section">
+                <div className="chat-container">
+                  <div className="messages-container">
+                    {messages.length === 0 && (
+                      <div className="welcome-message">
+                        Enter a topic to start the conversation
+                      </div>
+                    )}
+                    {messages.map((msg, index) => (
+                      <div
+                        key={index}
+                        className={`message ${
+                          msg.role === "user"
+                            ? "user-message"
+                            : "assistant-message"
+                        }`}
+                      >
+                        <div className="message-content">{msg.content}</div>
+                      </div>
+                    ))}
+                    {isLoading && (
+                      <div className="loading-message">Processing...</div>
+                    )}
+                    <div ref={messagesEndRef} />
+                  </div>
+                  <MessageForm
+                    onSendMessage={handleSendMessage}
+                    isLoading={isLoading}
+                    currentTopic={currentTopic}
+                  />
                 </div>
-                <MessageForm
-                  onSendMessage={handleSendMessage}
-                  isLoading={isLoading}
-                  onReset={handleReset}
-                />
               </div>
-            </div>
+            )}
           </div>
         </>
       ) : (
