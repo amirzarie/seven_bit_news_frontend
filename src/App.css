@@ -427,28 +427,82 @@
 }
 
 .topic-input-container {
-  position: sticky;
-  top: 70px; /* Reduced from 80px */
-  z-index: 900;
+  position: relative;
+  margin-top: 62px; /* Reduced from 65px */
+  padding: 0 20px;
   width: 100%;
-  max-width: 500px;
-  margin: 0 auto 15px auto; /* Reduced bottom margin from 20px to 15px */
-  padding: 8px 12px;
-  background: #ffffff;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.topic-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* Updated fancy loading spinner with black and orange theme */
+.loading-spinner {
+  position: absolute;
+  right: -45px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: 
+    linear-gradient(0deg, rgba(255, 144, 64, 0.1) 33%, 
+                         rgba(0, 0, 0, 0.8) 100%);
+  animation: spin 0.8s linear infinite;
+  box-shadow: 
+    0 0 10px rgba(255, 144, 64, 0.2),
+    0 0 20px rgba(255, 144, 64, 0.1);
+}
+
+.loading-spinner::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-radius: 50%;
+  background: white;
+}
+
+.loading-spinner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 45%;
+  width: 4px;
+  height: 14px;
+  background: #ff9040; /* Changed to orange */
+  border-radius: 2px;
+  transform-origin: 50% 100%;
+  animation: spinnerTick 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+@keyframes spinnerTick {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .topic-form {
   display: flex;
+  align-items: center;
   gap: 10px;
-  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative; /* Add this to contain the loading spinner */
 }
 
 .topic-input {
   flex: 1;
-  padding: 8px 12px;
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
@@ -459,8 +513,13 @@
   border-color: #000;
 }
 
+.topic-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
 .topic-submit-btn {
-  padding: 8px 16px;
+  padding: 12px 24px;
   background-color: #000;
   color: white;
   border: none;
@@ -468,6 +527,8 @@
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s ease;
+  white-space: nowrap;
+  min-width: 120px; /* Ensure minimum width */
 }
 
 .topic-submit-btn:hover {
@@ -480,7 +541,7 @@
 }
 
 .topic-reset-btn {
-  padding: 8px 16px;
+  padding: 12px 24px;
   background-color: #ff9040;
   color: white;
   border: none;
@@ -488,6 +549,7 @@
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s ease;
+  white-space: nowrap;
 }
 
 .topic-reset-btn:hover {

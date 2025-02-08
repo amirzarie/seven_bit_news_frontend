@@ -234,13 +234,14 @@ function App() {
                   onChange={(e) => setTopicInput(e.target.value)}
                   placeholder="Enter a topic..."
                   className="topic-input"
+                  disabled={isLoading}
                 />
                 <button
                   type="submit"
                   className="topic-submit-btn"
                   disabled={isLoading || !topicInput.trim()}
                 >
-                  Search Topic
+                  {isLoading ? 'Processing...' : 'Search Topic'}
                 </button>
                 <button
                   type="button"
@@ -250,6 +251,7 @@ function App() {
                 >
                   New Topic
                 </button>
+                {isLoading && <div className="loading-spinner" />}
               </form>
             </div>
           )}
