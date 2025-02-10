@@ -13,6 +13,26 @@ import LocationChart from "./components/LocationChart";
 import NetworkGraph from "./components/NetworkGraph";
 import { API_ENDPOINTS } from "./config";
 
+const fetchWithTimeout = async (url, options, timeout = 300000) => { // 5 minute timeout
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeout);
+  
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    return response;
+  } catch (error) {
+    clearTimeout(timeoutId);
+    if (error.name === 'AbortError') {
+      throw new Error('Request timed out');
+    }
+    throw error;
+  }
+};
+
 function App() {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +53,7 @@ function App() {
   const handleSendMessage = async (message) => {
     setIsLoading(true);
     try {
-      const response = await fetch(API_ENDPOINTS.chat, {
+      const response = await fetchWithTimeout(API_ENDPOINTS.chat, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +104,7 @@ function App() {
   const handleReset = async () => {
     setIsLoading(true);
     try {
-      await fetch(API_ENDPOINTS.chat, {
+      await fetchWithTimeout(API_ENDPOINTS.chat, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -124,7 +144,7 @@ function App() {
 
   const fetchTrendingNews = async () => {
     try {
-      const response = await fetch(API_ENDPOINTS.trending);
+      const response = await fetchWithTimeout(API_ENDPOINTS.trending);
       const data = await response.json();
       setTrendingNews(data.trending_articles);
     } catch (error) {
@@ -147,13 +167,18 @@ function App() {
           "Content-Type": "application/json",
           "X-User-ID": userId,
         },
+        // Increase timeout by not setting a timeout
+        keepalive: true,
         body: JSON.stringify({
           topic: topic,
         }),
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        if (response.status === 504) {
+          throw new Error("The request took too long to process. This usually happens with broad topics that return many articles. Try a more specific topic.");
+        }
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
@@ -162,14 +187,12 @@ function App() {
       setWordFrequencies(data.word_frequencies);
       setArticles(data.articles);
       setLocations(data.locations);
-      // Update messages with the initial summary from the backend
       if (data.chat_history) {
         setMessages(data.chat_history);
       } else if (data.initial_summary) {
-        // Fallback in case chat_history isn't provided
         setMessages([{ role: "assistant", content: data.initial_summary }]);
       } else {
-        setMessages([]); // Clear messages if no summary provided
+        setMessages([]);
       }
       if (data.network_data) {
         setNetworkData(data.network_data);
@@ -177,7 +200,10 @@ function App() {
     } catch (error) {
       console.error("Error setting topic:", error);
       setMessages([
-        { role: "system", content: "Error: Could not process your request." },
+        { 
+          role: "system", 
+          content: error.message || "An error occurred while processing your request. Please try a more specific topic or try again."
+        },
       ]);
     } finally {
       setIsLoading(false);

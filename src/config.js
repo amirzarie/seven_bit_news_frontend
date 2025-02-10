@@ -8,8 +8,8 @@ export const BASE_URL =
 
 // API endpoints
 export const API_ENDPOINTS = {
-  chat: `${BASE_URL}/api/chat`,
-  topic: `${BASE_URL}/api/topic`,
-  trending: `${BASE_URL}/api/trending`,
-  reset: `${BASE_URL}/api/reset`,
+  chat: `${process.env.REACT_APP_API_URL}/api/chat`,
+  topic: `${process.env.REACT_APP_API_URL}/api/topic`,
+  trending: `${process.env.REACT_APP_API_URL}/api/trending`,
+  reset: `${process.env.REACT_APP_API_URL}/api/reset`,
 };
