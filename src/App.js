@@ -13,21 +13,22 @@ import LocationChart from "./components/LocationChart";
 import NetworkGraph from "./components/NetworkGraph";
 import { API_ENDPOINTS } from "./config";
 
-const fetchWithTimeout = async (url, options, timeout = 300000) => { // 5 minute timeout
+const fetchWithTimeout = async (url, options, timeout = 300000) => {
+  // 5 minute timeout
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeout);
-  
+
   try {
     const response = await fetch(url, {
       ...options,
-      signal: controller.signal
+      signal: controller.signal,
     });
     clearTimeout(timeoutId);
     return response;
   } catch (error) {
     clearTimeout(timeoutId);
-    if (error.name === 'AbortError') {
-      throw new Error('Request timed out');
+    if (error.name === "AbortError") {
+      throw new Error("Request timed out");
     }
     throw error;
   }
@@ -176,7 +177,9 @@ function App() {
 
       if (!response.ok) {
         if (response.status === 504) {
-          throw new Error("The request took too long to process. This usually happens with broad topics that return many articles. Try a more specific topic.");
+          throw new Error(
+            "The request took too long to process. This usually happens with broad topics that return many articles. Try a more specific topic."
+          );
         }
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -200,9 +203,11 @@ function App() {
     } catch (error) {
       console.error("Error setting topic:", error);
       setMessages([
-        { 
-          role: "system", 
-          content: error.message || "An error occurred while processing your request. Please try a more specific topic or try again."
+        {
+          role: "system",
+          content:
+            error.message ||
+            "An error occurred while processing your request. Please try a more specific topic or try again.",
         },
       ]);
     } finally {
@@ -267,7 +272,7 @@ function App() {
                   className="topic-submit-btn"
                   disabled={isLoading || !topicInput.trim()}
                 >
-                  {isLoading ? 'Processing...' : 'Search Topic'}
+                  {isLoading ? "Processing..." : "Search Topic"}
                 </button>
                 <button
                   type="button"
