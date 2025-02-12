@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import TrendingNews from "./TrendingNews";
+import TutorialContent from "./TutorialContent";
 import "./MenuStyles.css";
 
-const TrendingNewsMenu = ({ articles }) => {
+const TutorialMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -11,7 +11,7 @@ const TrendingNewsMenu = ({ articles }) => {
         className="header-button"
         onClick={() => setIsOpen(!isOpen)}
       >
-        Trending News
+        Tutorials
       </button>
       
       {isOpen && (
@@ -19,13 +19,13 @@ const TrendingNewsMenu = ({ articles }) => {
           <div className="menu-overlay" onClick={() => setIsOpen(false)} />
           <div className="menu-sidebar">
             <div className="menu-sidebar-header">
-              <h2>Trending News</h2>
+              <h2>Tutorials</h2>
               <button className="close-button" onClick={() => setIsOpen(false)}>
                 ×
               </button>
             </div>
             <div className="menu-sidebar-content">
-              <TrendingNews articles={articles} />
+              <TutorialContent />
             </div>
           </div>
         </>
@@ -34,4 +34,4 @@ const TrendingNewsMenu = ({ articles }) => {
   );
 };
 
-export default TrendingNewsMenu;
+export default TutorialMenu; 

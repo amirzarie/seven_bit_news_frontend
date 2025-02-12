@@ -1,5 +1,5 @@
 runtime: nodejs20
-service: frontend
+service: default
 
 handlers:
   - url: /static

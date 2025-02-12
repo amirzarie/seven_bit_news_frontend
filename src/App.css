@@ -1,37 +1,48 @@
 /* App.css */
+* {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+/* Update specific heading styles if needed */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500;
+}
+
 .app-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px; /* Increased to match trending menu header */
+  height: 60px;
   background-color: #000;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 1rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   box-sizing: border-box;
 }
 
 .app-header h1 {
-  margin: 0; /* Remove margin-right */
+  margin: 0;
   font-size: 24px;
-  flex: 1; /* Allow title to take up remaining space */
-  text-align: center; /* Center the title */
+  flex: 0 1 auto; /* Changed from flex: 1 to prevent pushing other elements */
+  text-align: center;
 }
 
 .app-header button {
   background-color: white;
   color: #000;
   border: 1px solid #000;
-  padding: 8px 20px; /* Increased padding */
+  padding: 8px 12px; /* Reduced padding for mobile */
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  font-size: 16px; /* Increased font size */
+  font-size: 14px; /* Slightly smaller font for mobile */
+  white-space: nowrap; /* Prevent text wrapping */
 }
 
 .app-header button:hover {
@@ -40,21 +51,13 @@
 }
 
 .content-container {
-  display: grid;
-  /* Make the grid conditional based on whether chat section exists */
-  grid-template-columns: minmax(500px, 1fr) 450px minmax(400px, 1fr);
-  gap: 25px;
-  margin-top: 60px;
-  padding: 15px;
-  max-width: 1800px;
-  margin-left: auto;
-  margin-right: auto;
-  align-items: start;
-}
-
-/* Add this new style for when there's no topic */
-.content-container:has(> :not(.chat-section)) {
-  grid-template-columns: minmax(500px, 1fr) 450px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 110px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .chat-section,
@@ -64,10 +67,11 @@
 }
 
 .chat-section {
-  grid-column: 3;
-  height: 100%;
   width: 100%;
-  min-width: 400px; /* Add minimum width */
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .visualizations-section {
@@ -135,24 +139,18 @@
 }
 
 .chat-container {
-  height: calc(100vh - 225px);
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  height: 400px; /* Fixed height for mobile */
   display: flex;
   flex-direction: column;
-  width: 100%;
-  box-sizing: border-box;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .messages-container {
   flex: 1;
   overflow-y: auto;
-  padding: 15px;
-  margin-bottom: 10px;
-  width: 100%; /* Add explicit width */
-  box-sizing: border-box; /* Include padding in width calculation */
+  padding: 10px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .message {
@@ -176,36 +174,44 @@
 }
 
 .message-form {
-  padding: 10px;
+  padding: 8px;
+  background: white;
   border-top: 1px solid #eee;
+  width: 100%;
   box-sizing: border-box;
 }
 
 .message-input-container {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
+  width: 100%;
 }
 
 .message-input {
   flex: 1;
-  padding: 12px;
-  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 14px;
-  box-sizing: border-box;
+  height: 40px;
+  min-width: 0; /* Allow input to shrink */
 }
 
 .send-button {
-  padding: 12px 20px;
+  padding: 8px 16px;
   background-color: #000;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s ease;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   white-space: nowrap;
+  flex-shrink: 0; /* Prevent button from shrinking */
 }
 
 .reset-button {
@@ -312,44 +318,91 @@
     height: 250px;
   }
 
+  .app-header {
+    padding: 0 10px; /* Even smaller padding for very small screens */
+  }
+
   .app-header h1 {
-    font-size: 20px;
+    font-size: 20px; /* Smaller title for mobile */
   }
 
-  .menu-text {
-    display: none;
+  .app-header button {
+    padding: 6px 10px; /* Smaller padding for mobile */
+    font-size: 12px; /* Smaller font for mobile */
   }
 
+  /* Adjust header layout for very small screens */
+  .header-left {
+    min-width: auto; /* Remove minimum width on mobile */
+  }
+
+  .header-right {
+    min-width: auto; /* Remove minimum width on mobile */
+  }
+
+  /* Hide user info on very small screens if needed */
   .user-info {
     display: none;
   }
 
   .current-topic {
-    position: fixed; /* Change from sticky to fixed */
-    top: 60px; /* Align right below the header */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Center horizontally */
-    z-index: 900;
-    width: 100%; /* Adjust width for mobile */
-    max-width: 500px; /* Remove max-width constraint */
-    margin: 0; /* Remove margins */
-    padding: 8px 12px;
-    background: #ffffff;
-    border-bottom: 1px solid #e9ecef;
-    border-radius: 0 0 8px 8px; /* Round only bottom corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    padding: 6px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .current-topic-inner {
+    max-width: 250px;
+    width: 90%; /* Add width constraint */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px; /* Reduce gap for very small screens */
   }
 
   .topic-content {
-    justify-content: center; /* Ensure content is centered */
-    width: 100%; /* Full width */
-    text-align: center; /* Center text */
+    font-size: 11px;
+    text-align: center;
+    flex: 1; /* Allow text to take available space */
+    min-width: 0; /* Allow text to shrink */
+    overflow: hidden; /* Prevent overflow */
+    text-overflow: ellipsis; /* Add ellipsis for long text */
+    white-space: nowrap; /* Keep text in one line */
   }
 
-  /* Adjust content container to account for fixed current topic */
-  .content-container {
-    margin-top: 120px; /* Add space for fixed current topic */
-    padding: 10px;
+  .topic-reset-btn {
+    font-size: 11px;
+    padding: 3px 6px;
+    height: 24px;
+    flex-shrink: 0; /* Prevent button from shrinking */
+  }
+
+  .menu-content {
+    width: 100%;
+    max-width: none;
+  }
+
+  .tutorial-content {
+    padding: 50px 15px 20px;
+  }
+
+  .landing-tutorial {
+    margin: 70px 15px 0;
+    padding: 20px;
+  }
+}
+
+/* Add even smaller screen adjustments if needed */
+@media screen and (max-width: 360px) {
+  .app-header h1 {
+    font-size: 18px; /* Even smaller title for very small screens */
+  }
+
+  .app-header button {
+    padding: 5px 8px; /* Minimal padding for very small screens */
   }
 }
 
@@ -359,33 +412,55 @@
 }
 
 .visualization-container {
+  width: 100%;
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 15px;
-  width: 100%;
-  box-sizing: border-box;
+  margin-bottom: 15px;
+  overflow: hidden;
 }
 
 .current-topic {
-  position: sticky;
-  top: 70px; /* Reduced from 80px */
-  z-index: 900;
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto 15px auto; /* Reduced bottom margin from 20px to 15px */
-  padding: 8px 12px;
-  background: #ffffff;
-  border: 1px solid #e9ecef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 12px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  z-index: 999;
+  box-sizing: border-box;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  margin: 4px 0;
+}
+
+.current-topic-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  width: auto;
+  min-height: 38px;
 }
 
 .topic-content {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px; /* Increased gap to give more space between elements */
+  gap: 8px;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 .topic-label {
@@ -406,14 +481,14 @@
 
 /* Update article table container styles */
 .article-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  width: 100%;
-  box-sizing: border-box;
-  height: 500px;
-  overflow-y: auto;
+  padding: 10px;
+  margin-bottom: 15px;
 }
 
 .article-table-wrapper {
@@ -439,56 +514,49 @@
   cursor: not-allowed;
 }
 
-/* Updated fancy loading spinner with black and orange theme */
-.loading-spinner {
-  position: absolute;
-  right: -45px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: 
-    linear-gradient(0deg, rgba(255, 144, 64, 0.1) 33%, 
-                         rgba(0, 0, 0, 0.8) 100%);
-  animation: spin 0.8s linear infinite;
-  box-shadow: 
-    0 0 10px rgba(255, 144, 64, 0.2),
-    0 0 20px rgba(255, 144, 64, 0.1);
-}
-
-.loading-spinner::before {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  right: 2px;
-  bottom: 2px;
-  border-radius: 50%;
-  background: white;
-}
-
-.loading-spinner::after {
-  content: '';
-  position: absolute;
+/* Loading overlay */
+.loading-spinner-container {
+  position: fixed;
   top: 0;
-  left: 45%;
-  width: 4px;
-  height: 14px;
-  background: #ff9040; /* Changed to orange */
-  border-radius: 2px;
-  transform-origin: 50% 100%;
-  animation: spinnerTick 0.8s linear infinite;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: 1000;
+  backdrop-filter: blur(4px);
 }
 
-@keyframes spin {
-  0% { transform: translateY(-50%) rotate(0deg); }
-  100% { transform: translateY(-50%) rotate(360deg); }
+/* Main loading animation container */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
 }
 
-@keyframes spinnerTick {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Single random icon with animation */
+.loading-icon {
+  font-size: 50px;
+  animation: pulseAndFade 2s ease-in-out infinite;
+}
+
+@keyframes pulseAndFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
 }
 
 .topic-form {
@@ -497,16 +565,18 @@
   gap: 10px;
   max-width: 600px;
   margin: 0 auto;
-  position: relative; /* Add this to contain the loading spinner */
+  position: relative;
+  padding: 0 10px;
 }
 
 .topic-input {
   flex: 1;
-  padding: 12px;
+  padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
   outline: none;
+  height: 40px; /* Set consistent height */
 }
 
 .topic-input:focus {
@@ -519,16 +589,20 @@
 }
 
 .topic-submit-btn {
-  padding: 12px 24px;
+  padding: 8px 16px;
+  font-size: 14px;
+  margin: 0;
+  border-radius: 4px;
   background-color: #000;
   color: white;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
   transition: background-color 0.3s ease;
   white-space: nowrap;
-  min-width: 120px; /* Ensure minimum width */
+  height: 40px; /* Match input height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .topic-submit-btn:hover {
@@ -541,15 +615,21 @@
 }
 
 .topic-reset-btn {
-  padding: 12px 24px;
+  margin: 0;
+  padding: 4px 12px;
+  height: 28px;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #ff9040;
   color: white;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
   transition: background-color 0.3s ease;
   white-space: nowrap;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 .topic-reset-btn:hover {
@@ -564,16 +644,38 @@
 .header-left {
   display: flex;
   align-items: center;
-  min-width: 150px; /* Reserve space for the hamburger menu */
+  flex: 1;
+  gap: 16px; /* Increased from default gap */
 }
 
-/* Add this new class */
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .header-right {
   display: flex;
   align-items: center;
-  min-width: 150px;
   justify-content: flex-end;
-  gap: 15px; /* Add space between user info and sign out button */
+  flex: 1;
+  gap: 1rem;
+}
+
+.header-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-title::after {
+  content: '📰';
+  font-size: 20px; /* Slightly larger than the text */
 }
 
 .user-info {
@@ -608,4 +710,724 @@
 /* Update button styles when in current-topic */
 .current-topic .topic-reset-btn {
   margin-left: 8px; /* Add some space between the topic text and button */
+}
+
+/* Tutorial styles for landing page */
+.landing-tutorial {
+  max-width: 800px;
+  margin: 80px auto 0;
+  padding: 30px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.landing-tutorial .tutorial-content {
+  padding: 0;
+}
+
+/* Update hamburger menu styles */
+.hamburger-menu-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.hamburger-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 35px; /* Match height with Trending News button */
+}
+
+.hamburger-button:hover {
+  background-color: #ff9040;
+  color: white;
+}
+
+/* Update hamburger icon and its states */
+.hamburger-icon {
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: currentColor; /* Uses the current text color */
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 2px;
+  background: currentColor; /* Uses the current text color */
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+.hamburger-icon::before {
+  top: -5px;
+}
+
+.hamburger-icon::after {
+  bottom: -5px;
+}
+
+/* Menu overlay */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1100; /* Increased z-index to be above header */
+}
+
+/* Menu content */
+.menu-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 90%;
+  max-width: 400px;
+  background: white;
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 1101; /* Higher than overlay */
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Close button */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px 10px;
+  color: #333;
+  z-index: 1102; /* Above menu content */
+}
+
+.close-button:hover {
+  color: #000;
+}
+
+/* Tutorial content styles - Update these */
+.tutorial-content {
+  padding: 40px 20px 20px; /* Added top padding for close button */
+  color: #333;
+}
+
+.tutorial-content h2 {
+  color: #000;
+  margin-bottom: 25px;
+  font-size: 24px;
+}
+
+.tutorial-content section {
+  margin-bottom: 30px;
+}
+
+.tutorial-content h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.tutorial-content p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.tutorial-content ul,
+.tutorial-content ol {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.tutorial-content li {
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.tutorial-content ul ul {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* Landing page specific styles */
+.landing-tutorial {
+  max-width: 800px;
+  margin: 80px auto 0;
+  padding: 30px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.landing-tutorial .tutorial-content {
+  padding: 0;
+}
+
+/* Tutorial button specific styles */
+.tutorial-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Trending News button specific styles */
+.trending-news-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Completely remove any hamburger styling from trending news */
+.trending-news-button span:not(.button-text) {
+  display: none !important;
+}
+
+/* Trending News hamburger icon */
+.trending-icon {
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  position: relative;
+}
+
+.trending-icon::before,
+.trending-icon::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  left: 0;
+}
+
+.trending-icon::before {
+  top: -5px;
+}
+
+.trending-icon::after {
+  bottom: -5px;
+}
+
+/* Tutorial hamburger specific styles */
+.tutorial-hamburger .hamburger-icon {
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  position: relative;
+}
+
+.tutorial-hamburger .hamburger-icon::before,
+.tutorial-hamburger .hamburger-icon::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  left: 0;
+}
+
+.tutorial-hamburger .hamburger-icon::before {
+  top: -5px;
+}
+
+.tutorial-hamburger .hamburger-icon::after {
+  bottom: -5px;
+}
+
+/* Common header button style */
+.header-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 35px;
+  white-space: nowrap;
+}
+
+.header-button:hover {
+  background-color: #ff9040;
+  color: white;
+}
+
+/* Menu icon only for Tutorial button */
+.tutorial-menu .menu-icon {
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  position: relative;
+}
+
+.tutorial-menu .menu-icon::before,
+.tutorial-menu .menu-icon::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  left: 0;
+}
+
+.tutorial-menu .menu-icon::before {
+  top: -5px;
+}
+
+.tutorial-menu .menu-icon::after {
+  bottom: -5px;
+}
+
+/* Remove all menu icons from Trending News button */
+.trending-news-button .menu-icon,
+.trending-news-button .hamburger-icon,
+.trending-news-button .trending-icon {
+  display: none !important;
+}
+
+/* Update the mobile responsive styles */
+@media screen and (max-width: 768px) {
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 8px;
+  }
+
+  .chat-section,
+  .visualizations-section,
+  .articles-section {
+    width: 100%;
+    min-width: unset;
+    max-width: 100%;
+  }
+
+  .visualization-container,
+  .article-table-container,
+  .chat-section {
+    margin-bottom: 12px;
+  }
+
+  .pie-chart-container {
+    height: 250px;
+  }
+
+  .word-cloud-container {
+    height: 200px;
+  }
+
+  .current-topic {
+    padding: 6px;
+  }
+
+  .current-topic-inner {
+    max-width: 300px;
+    gap: 8px;
+  }
+
+  .topic-content {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .topic-reset-btn {
+    font-size: 12px;
+    padding: 4px 8px;
+    height: 28px;
+    min-height: unset;
+  }
+
+  .topic-submit-btn {
+    width: 100%; /* Full width only on mobile */
+    padding: 12px;
+    font-size: 16px;
+    height: 36px;
+  }
+}
+
+/* Even smaller screens */
+@media screen and (max-width: 480px) {
+  .app-header {
+    padding: 0 10px;
+  }
+
+  .header-left {
+    gap: 5px;
+  }
+
+  .header-button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .user-info {
+    display: none;
+  }
+
+  .chat-container {
+    height: calc(100vh - 180px);
+  }
+
+  .chat-messages {
+    max-height: calc(100vh - 240px);
+  }
+
+  .current-topic-inner {
+    max-width: 250px;
+  }
+
+  .topic-content {
+    font-size: 11px;
+  }
+
+  .topic-reset-btn {
+    font-size: 11px;
+    padding: 3px 6px;
+    height: 24px;
+  }
+
+  .loading-spinner {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Responsive media queries */
+@media screen and (min-width: 768px) {
+  /* Tablet and desktop styles */
+  .content-container {
+    display: grid;
+    grid-template-columns: 1fr 550px; /* Increased from 500px */
+    grid-template-rows: min-content;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .chat-section {
+    position: static;
+    grid-column: 2;
+    align-self: start;
+  }
+
+  .chat-container {
+    height: calc(100vh - 160px); /* Increased from -200px to make it longer */
+  }
+
+  .articles-section {
+    grid-column: 1;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  /* Desktop styles */
+  .content-container {
+    grid-template-columns: minmax(550px, 1fr) minmax(450px, 1fr) 550px; /* Increased all column widths */
+    grid-template-rows: min-content;
+    align-items: start;
+  }
+
+  .chat-section {
+    grid-column: 3;
+    align-self: start;
+  }
+}
+
+/* Mobile-specific improvements */
+@media screen and (max-width: 767px) {
+  .app-header {
+    padding: 0 10px;
+  }
+
+  .app-header h1 {
+    font-size: 18px;
+  }
+
+  .header-button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .current-topic {
+    padding: 8px;
+  }
+
+  .current-topic-inner {
+    max-width: 300px;
+  }
+
+  /* Improve touch targets */
+  button, 
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 44px; /* iOS recommended minimum */
+    touch-action: manipulation;
+  }
+
+  /* Add pull-to-refresh feel */
+  .messages-container {
+    overscroll-behavior-y: contain;
+  }
+
+  /* Improve scrolling */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Prevent zoom on inputs */
+  input[type="text"],
+  textarea {
+    font-size: 16px;
+  }
+
+  /* Make charts more touch-friendly */
+  .visualization-container {
+    touch-action: pan-x pan-y;
+  }
+
+  /* Ensure content fits viewport width */
+  .content-container {
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 100px;
+  }
+
+  /* Make visualizations responsive */
+  .visualization-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    overflow-x: hidden;
+  }
+
+  /* Ensure tables don't cause horizontal scroll */
+  .article-table-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+
+  /* Compact New Topic button */
+  .topic-reset-btn {
+    padding: 2px 8px;
+    height: 24px;
+    min-height: 24px;
+    font-size: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: #ff9040;
+    color: white;
+    border: none;
+  }
+
+  /* Make topic text more compact */
+  .topic-content {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* Ensure all content containers fit viewport */
+  .chat-section,
+  .visualizations-section,
+  .articles-section {
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* Adjust chart containers */
+  .pie-chart-container,
+  .word-cloud-container {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  /* Mobile chat input styles */
+  .message-input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    height: 36px; /* Match mobile button height */
+    margin: 0;
+  }
+
+  .send-button {
+    padding: 0 12px;
+    height: 36px; /* Match mobile input height */
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .message-input-container {
+    gap: 8px;
+    align-items: center;
+    margin: 0;
+  }
+}
+
+/* Even smaller screens */
+@media screen and (max-width: 480px) {
+  .current-topic-inner {
+    max-width: 250px;
+  }
+
+  .topic-reset-btn {
+    padding: 2px 6px;
+    height: 22px;
+    min-height: 22px;
+    font-size: 11px;
+  }
+
+  .topic-content {
+    font-size: 11px;
+  }
+}
+
+/* Prevent horizontal scroll */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ensure all content fits viewport width */
+* {
+  box-sizing: border-box;
+  max-width: 100vw;
+}
+
+.content-container {
+  padding: 8px;
+  width: 100%;
+  margin-top: 100px;
+  overflow-x: hidden;
+}
+
+/* Mobile styles for topic input section */
+@media screen and (max-width: 768px) {
+  .topic-form {
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 8px;
+  }
+
+  .topic-input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    height: 36px;
+  }
+
+  .topic-submit-btn {
+    width: 100%;
+    padding: 8px;
+    height: 36px;
+    font-size: 14px;
+    margin: 0;
+    border-radius: 4px;
+  }
+
+  .topic-input-container {
+    margin-top: 52px; /* Reduced from 62px */
+    padding: 0 10px;
+  }
+}
+
+/* Even smaller screens */
+@media screen and (max-width: 480px) {
+  .topic-form {
+    padding: 0 5px;
+  }
+
+  .topic-input {
+    padding: 6px;
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .topic-submit-btn {
+    padding: 6px;
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .topic-input-container {
+    margin-top: 48px;
+    padding: 0 8px;
+  }
+
+  /* Adjust loading spinner position for mobile */
+  .loading-spinner {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.header-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Hide text and show icon on small screens */
+@media screen and (max-width: 480px) {
+  .header-title {
+    font-size: 24px;  /* Larger size for the emoji */
+  }
+  
+  .header-title span {
+    display: none;  /* Hide the text */
+  }
+  
+  .header-title::after {
+    content: '📰';  /* Show newspaper icon */
+    font-size: 24px; /* Same size as container */
+  }
 }

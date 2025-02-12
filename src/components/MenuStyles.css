@@ -1,0 +1,117 @@
+/* Common styles for both menus */
+.menu-container {
+  position: relative;
+}
+
+/* Header button style */
+.header-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 35px;
+  white-space: nowrap;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.header-button:hover {
+  background-color: #ff9040;
+  color: white;
+}
+
+/* Menu overlay */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+/* Sidebar styles */
+.menu-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 75%;
+  max-width: 1200px;
+  background-color: white;
+  z-index: 999;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  animation: slideIn 0.3s ease-out;
+}
+
+.menu-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  border-bottom: 1px solid #eee;
+  background-color: #000;
+  color: white;
+}
+
+.menu-sidebar-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500;
+}
+
+.menu-sidebar-content {
+  padding: 20px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0 8px;
+}
+
+.close-button:hover {
+  color: #ccc;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .menu-sidebar {
+    width: 100%;
+    max-width: none;
+  }
+
+  .menu-sidebar-content {
+    padding: 15px;
+  }
+
+  .menu-sidebar-header {
+    padding: 0 15px;
+  }
+
+  .header-button {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+} 

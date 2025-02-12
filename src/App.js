@@ -12,6 +12,26 @@ import TrendingNewsMenu from "./components/TrendingNewsMenu";
 import LocationChart from "./components/LocationChart";
 import NetworkGraph from "./components/NetworkGraph";
 import { API_ENDPOINTS } from "./config";
+import TutorialContent from './components/TutorialContent';
+import TutorialMenu from './components/TutorialMenu';
+
+const loadingIcons = [
+  '📰', // newspaper
+  '🌍', // globe for geography/world news
+  '🔬', // microscope for science
+  '💻', // computer for tech
+  '⚕️', // medical symbol for health
+  '⚖️', // scales for law/justice/politics
+  '📊', // chart for business/economics
+  '🎓', // graduation cap for education
+  '🏛️', // classical building for government/politics
+  '🏥', // hospital for healthcare
+  '📱', // mobile phone for tech news
+  '🌡️', // thermometer for weather/climate
+  '💼', // briefcase for business
+  '🏆', // trophy for sports
+  '🎨'  // art palette for culture/arts
+];
 
 const fetchWithTimeout = async (url, options, timeout = 300000) => {
   // 5 minute timeout
@@ -50,6 +70,7 @@ function App() {
   const [locations, setLocations] = useState([]);
   const [topicInput, setTopicInput] = useState("");
   const [networkData, setNetworkData] = useState(null);
+  const [currentLoadingIcon, setCurrentLoadingIcon] = useState(loadingIcons[0]);
 
   const handleSendMessage = async (message) => {
     setIsLoading(true);
@@ -223,40 +244,54 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    if (isLoading) {
+      const intervalId = setInterval(() => {
+        const randomIndex = Math.floor(Math.random() * loadingIcons.length);
+        setCurrentLoadingIcon(loadingIcons[randomIndex]);
+      }, 2000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [isLoading]);
+
   return (
     <div className="App">
       <header className="app-header">
         <div className="header-left">
-          {user && <TrendingNewsMenu articles={trendingNews} />}
-        </div>
-        <h1>7-bit News</h1>
-        <div className="header-right">
           {user && (
-            <span className="user-info">Signed in as: {user.displayName}</span>
+            <>
+              <TutorialMenu />
+              <TrendingNewsMenu articles={trendingNews} />
+            </>
           )}
+        </div>
+        <div className="header-center">
+          <p className="header-title"><span>7-bit News</span></p>
+        </div>
+        <div className="header-right">
+          {user && <span className="user-info">Signed in as: {user.displayName}</span>}
           {user ? <SignOut setUser={setUser} /> : <SignIn setUser={setUser} />}
         </div>
       </header>
       {user ? (
         <>
-          {currentTopic ? (
+          {currentTopic && (
             <div className="current-topic">
-              <div className="topic-content">
-                <span className="topic-label">Current Topic:</span>
-                <span className="topic-text">
-                  "{currentTopic.toUpperCase()}"
-                </span>
+              <div className="current-topic-inner">
+                <div className="topic-content">
+                  Current Topic: "{currentTopic}"
+                </div>
                 <button
-                  type="button"
-                  onClick={handleReset}
                   className="topic-reset-btn"
-                  disabled={isLoading}
+                  onClick={handleReset}
                 >
                   New Topic
                 </button>
               </div>
             </div>
-          ) : (
+          )}
+          {!currentTopic && (
             <div className="topic-input-container">
               <form onSubmit={handleTopicSubmit} className="topic-form">
                 <input
@@ -274,15 +309,6 @@ function App() {
                 >
                   {isLoading ? "Processing..." : "Search Topic"}
                 </button>
-                <button
-                  type="button"
-                  onClick={handleReset}
-                  className="topic-reset-btn"
-                  disabled={isLoading}
-                >
-                  New Topic
-                </button>
-                {isLoading && <div className="loading-spinner" />}
               </form>
             </div>
           )}
@@ -374,7 +400,16 @@ function App() {
           </div>
         </>
       ) : (
-        <p>Please sign in to start chatting.</p>
+        <div className="landing-tutorial">
+          <TutorialContent />
+        </div>
+      )}
+      {isLoading && (
+        <div className="loading-spinner-container">
+          <div className="loading-spinner">
+            <div className="loading-icon">{currentLoadingIcon}</div>
+          </div>
+        </div>
       )}
     </div>
   );
