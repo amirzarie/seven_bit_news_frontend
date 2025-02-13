@@ -24,6 +24,10 @@ const SentimentBarChart = ({ articles, currentTopic }) => {
     return null;
   }
 
+  // Add debug logs
+  console.log('Articles received:', articles);
+  console.log('Sample sentiment:', articles[0]?.sentiment);
+
   // Define colors for political leanings
   const colors = {
     Left: "rgba(13, 110, 253, 0.8)", // Blue
@@ -35,6 +39,13 @@ const SentimentBarChart = ({ articles, currentTopic }) => {
   const leaningStats = articles.reduce((acc, article) => {
     const sourceLower = article.source.toLowerCase();
     let leaning;
+    
+    // Add debug log for each article's source and sentiment
+    console.log('Processing article:', {
+      source: article.source,
+      sentiment: article.sentiment
+    });
+
     if (
       ["cnn", "msnbc", "huffington post"].some((s) => sourceLower.includes(s))
     ) {
@@ -66,10 +77,20 @@ const SentimentBarChart = ({ articles, currentTopic }) => {
     return acc;
   }, {});
 
+  // Add debug log for leaning stats
+  console.log('Leaning stats:', leaningStats);
+
   // Calculate means and standard deviations including overall average
   const stats = ["Left", "Center", "Right"]
     .map((leaning) => {
-      if (!leaningStats[leaning]) return null;
+      // If no articles for this leaning, return zero values
+      if (!leaningStats[leaning]) {
+        return {
+          leaning,
+          polarity: { mean: 0, std: 0 },
+          subjectivity: { mean: 0, std: 0 }
+        };
+      }
 
       const calcStats = (values) => {
         const mean = values.reduce((sum, val) => sum + val, 0) / values.length;
@@ -87,8 +108,7 @@ const SentimentBarChart = ({ articles, currentTopic }) => {
         polarity: calcStats(leaningStats[leaning].polarities),
         subjectivity: calcStats(leaningStats[leaning].subjectivities),
       };
-    })
-    .filter(Boolean);
+    });
 
   // Calculate overall averages
   const allPolarities = Object.values(leaningStats).flatMap(
@@ -282,6 +302,14 @@ const SentimentBarChart = ({ articles, currentTopic }) => {
       },
     },
   };
+
+  // After calculating stats and before returning the component
+  console.log('Final stats:', {
+    stats,
+    overallStats,
+    polarityData,
+    subjectivityData
+  });
 
   return (
     <div>
