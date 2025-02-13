@@ -22,12 +22,6 @@ const WordCloud = ({ wordFrequencies, currentTopic }) => {
         size: Math.log(value) * 10 + 10, // Reduced base size for better fit
       }));
 
-    // For debugging (optional)
-    console.log(
-      "Top 60 words:",
-      words.map((w) => `${w.text}: ${wordFrequencies[w.text]}`)
-    );
-
     // Set up the word cloud layout
     const layout = cloud()
       .size([600, 300])
