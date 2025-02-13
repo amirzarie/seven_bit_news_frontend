@@ -482,8 +482,10 @@ h1, h2, h3, h4, h5, h6 {
 /* Update article table container styles */
 .article-table-container {
   width: 100%;
+  height: calc(100vh - 160px); /* Match chat container height */
+  overflow-y: auto;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -493,7 +495,32 @@ h1, h2, h3, h4, h5, h6 {
 
 .article-table-wrapper {
   overflow-x: auto;
-  margin-bottom: 0; /* Remove bottom margin */
+  margin-bottom: 0;
+}
+
+/* Customize scrollbar appearance */
+.article-table-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.article-table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.article-table-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.article-table-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Update mobile styles */
+@media screen and (max-width: 767px) {
+  .article-table-container {
+    height: calc(100vh - 180px); /* Adjust height for mobile */
+  }
 }
 
 /* Update tooltip z-index to be higher than current-topic */
