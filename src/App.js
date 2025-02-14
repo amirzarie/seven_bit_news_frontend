@@ -71,6 +71,7 @@ function App() {
   const [topicInput, setTopicInput] = useState("");
   const [networkData, setNetworkData] = useState(null);
   const [currentLoadingIcon, setCurrentLoadingIcon] = useState(loadingIcons[0]);
+  const [isTopicLoading, setIsTopicLoading] = useState(false);
 
   const handleSendMessage = async (message) => {
     setIsLoading(true);
@@ -181,7 +182,7 @@ function App() {
   }, [user]);
 
   const handleTopicSelect = async (topic) => {
-    setIsLoading(true);
+    setIsTopicLoading(true);
     try {
       const response = await fetch(API_ENDPOINTS.topic, {
         method: "POST",
@@ -232,7 +233,7 @@ function App() {
         },
       ]);
     } finally {
-      setIsLoading(false);
+      setIsTopicLoading(false);
     }
   };
 
@@ -404,7 +405,7 @@ function App() {
           <TutorialContent />
         </div>
       )}
-      {isLoading && (
+      {isTopicLoading && (
         <div className="loading-spinner-container">
           <div className="loading-spinner">
             <div className="loading-icon">{currentLoadingIcon}</div>
