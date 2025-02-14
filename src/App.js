@@ -299,7 +299,7 @@ function App() {
                   type="text"
                   value={topicInput}
                   onChange={(e) => setTopicInput(e.target.value)}
-                  placeholder="Enter a topic..."
+                  placeholder="Enter a keyword (e.g., OpenAI)"
                   className="topic-input"
                   disabled={isLoading}
                 />

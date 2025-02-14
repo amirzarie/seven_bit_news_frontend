@@ -90,7 +90,7 @@ const TutorialContent = () => {
             <div className="step-number">2</div>
             <div className="step-content">
               <h4>Choose a Topic</h4>
-              <p>Enter any news topic you want to analyze</p>
+              <p>Enter any keyword you want to analyze from recent news</p>
             </div>
           </div>
           <div className="step">
