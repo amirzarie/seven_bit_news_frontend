@@ -15,6 +15,7 @@ import { API_ENDPOINTS } from "./config";
 import TutorialContent from './components/TutorialContent';
 import TutorialMenu from './components/TutorialMenu';
 import canadaFlag from './assets/media/canada-flag.png';
+import Footer from './components/Footer';
 
 const loadingIcons = [
   '📰', // newspaper
@@ -403,10 +404,12 @@ function App() {
               </div>
             )}
           </div>
+          <Footer />
         </>
       ) : (
         <div className="landing-tutorial">
           <TutorialContent />
+          <Footer />
         </div>
       )}
       {isTopicLoading && (

@@ -41,45 +41,51 @@
   position: fixed;
   top: 0;
   left: 0;
-  bottom: 0;
-  width: 75%;
-  max-width: 1200px;
+  height: 100vh;
+  width: 90%;
+  max-width: 1400px;
   background-color: white;
   z-index: 999;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   animation: slideIn 0.3s ease-out;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .menu-sidebar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 30px;
   height: 60px;
   border-bottom: 1px solid #eee;
   background-color: #000;
   color: white;
+  flex-shrink: 0;
 }
 
 .menu-sidebar-header h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: 22px;
   font-family: 'Ubuntu', sans-serif;
   font-weight: 500;
 }
 
 .menu-sidebar-content {
-  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px;
+  background-color: white;
+  min-height: calc(100vh - 60px);
 }
 
 .close-button {
   background: none;
   border: none;
   color: white;
-  font-size: 24px;
+  font-size: 28px;
   cursor: pointer;
-  padding: 0 8px;
+  padding: 0 12px;
 }
 
 .close-button:hover {
@@ -103,11 +109,11 @@
   }
 
   .menu-sidebar-content {
-    padding: 15px;
+    padding: 20px;
   }
 
   .menu-sidebar-header {
-    padding: 0 15px;
+    padding: 0 20px;
   }
 
   .header-button {
