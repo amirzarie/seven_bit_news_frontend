@@ -14,6 +14,7 @@ import NetworkGraph from "./components/NetworkGraph";
 import { API_ENDPOINTS } from "./config";
 import TutorialContent from './components/TutorialContent';
 import TutorialMenu from './components/TutorialMenu';
+import canadaFlag from './assets/media/canada-flag.png';
 
 const loadingIcons = [
   '📰', // newspaper
@@ -268,7 +269,10 @@ function App() {
           )}
         </div>
         <div className="header-center">
-          <p className="header-title"><span>7-bit News</span></p>
+          <p className="header-title">
+            <span>7-bit News</span>
+            <img src={canadaFlag} alt="Canadian Flag" className="flag-icon" />
+          </p>
         </div>
         <div className="header-right">
           {user && <span className="user-info">Signed in as: {user.displayName}</span>}

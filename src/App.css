@@ -701,9 +701,9 @@ h1, h2, h3, h4, h5, h6 {
   gap: 8px;
 }
 
-.header-title::after {
-  content: '📰';
-  font-size: 20px; /* Slightly larger than the text */
+.flag-icon {
+  height: 32px;
+  width: auto;
 }
 
 .user-info {
@@ -1447,15 +1447,14 @@ html, body {
 /* Hide text and show icon on small screens */
 @media screen and (max-width: 480px) {
   .header-title {
-    font-size: 24px;  /* Larger size for the emoji */
+    font-size: 24px;
   }
   
-  .header-title span {
+  .header-title span:first-child {
     display: none;  /* Hide the text */
   }
   
-  .header-title::after {
-    content: '📰';  /* Show newspaper icon */
-    font-size: 24px; /* Same size as container */
+  .flag-icon {
+    height: 36px;
   }
 }
