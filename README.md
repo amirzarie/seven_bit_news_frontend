@@ -17,19 +17,19 @@
 
 - [About the Project](#-about-the-project)
 - [Features](#-features)
-- [Tech Stack](#tech-stack)
+- [Tech Stack](#️-tech-stack)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
 - [Running Locally](#-running-locally)
 - [Deployment](#-deployment)
 - [Project Structure](#-project-structure)
-- [Environment Configuration](#environment-configuration)
+- [Environment Configuration](#️-environment-configuration)
 - [Available Scripts](#-available-scripts)
 - [Backend Integration](#-backend-integration)
 - [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
 - [License](#-license)
-- [Roadmap](#roadmap)
+- [Roadmap](#️-roadmap)
 
 ---
 
