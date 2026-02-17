@@ -174,9 +174,165 @@ body {
 }
 
 .assistant-message {
-  background-color: #f0f0f0; /* Changed back to original grey */
-  color: #333; /* Changed back to dark grey text */
+  background-color: #f3f4f6;
+  color: #1f2937;
   margin-right: auto;
+  border: 1px solid #d1d5db;
+}
+
+/* Markdown formatting enhancements */
+.assistant-message .message-content {
+  line-height: 1.7;
+}
+
+.assistant-message h1,
+.assistant-message h2,
+.assistant-message h3 {
+  color: #1f2937;
+  margin-top: 1.2rem;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+
+.assistant-message h1 {
+  font-size: 1.5rem;
+  border-bottom: 2px solid #3b82f6;
+  padding-bottom: 0.3rem;
+}
+
+.assistant-message h2 {
+  font-size: 1.3rem;
+}
+
+.assistant-message h3 {
+  font-size: 1.1rem;
+}
+
+.assistant-message ul,
+.assistant-message ol {
+  margin-left: 1.8rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.assistant-message li {
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+.assistant-message li::marker {
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+.assistant-message strong {
+  font-weight: 700;
+  color: #2563eb;
+  text-shadow: none;
+}
+
+.assistant-message em {
+  font-style: italic;
+  color: #6366f1;
+}
+
+.assistant-message code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+}
+
+.assistant-message code:not(pre code) {
+  background-color: #e5e7eb;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.assistant-message pre {
+  background-color: #1f2937;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.assistant-message pre code {
+  background-color: transparent;
+  padding: 0;
+  color: #f9fafb;
+}
+
+.assistant-message blockquote {
+  border-left: 4px solid #3b82f6;
+  padding-left: 1rem;
+  margin-left: 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+  color: #4b5563;
+  background-color: #f3f4f6;
+  padding: 0.8rem 1rem;
+  border-radius: 0.25rem;
+}
+
+.assistant-message a {
+  color: #2563eb;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.assistant-message a:hover {
+  color: #1d4ed8;
+}
+
+.assistant-message table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  background-color: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid #d1d5db;
+}
+
+.assistant-message th {
+  background-color: #f3f4f6;
+  padding: 0.75rem;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 2px solid #d1d5db;
+  color: #1f2937;
+}
+
+.assistant-message td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+}
+
+.assistant-message tr:last-child td {
+  border-bottom: none;
+}
+
+.assistant-message hr {
+  border: none;
+  border-top: 2px solid #d1d5db;
+  margin: 1.5rem 0;
+}
+
+.assistant-message p:last-child {
+  margin-bottom: 0;
+}
+
+/* Highlight important text */
+.assistant-message mark {
+  background-color: #fef3c7;
+  color: #92400e;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.2rem;
+  font-weight: 500;
 }
 
 .message-form {
