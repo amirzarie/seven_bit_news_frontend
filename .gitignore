@@ -7,6 +7,9 @@
 !tsconfig.json
 seven-bit-news-34b4d4f036cc.json
 
+# Allow demo video
+!demo/*.mp4
+
 # dependencies
 /node_modules
 /.pnp

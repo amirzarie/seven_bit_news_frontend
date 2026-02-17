@@ -13,6 +13,33 @@
 
 ---
 
+## 🎬 Demo Video
+
+<div align="center">
+
+### 📺 Watch Seven Bit News in Action!
+
+*90-second walkthrough showcasing AI-powered chat, interactive visualizations, sentiment analysis, and trending news features*
+
+</div>
+
+<div align="center">
+  <video src="demo/demo.mp4" width="80%" controls></video>
+</div>
+
+<div align="center">
+  
+[![Watch Demo](https://img.shields.io/badge/▶️_Watch_Demo-Click_Here-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](./demo/demo.mp4)
+
+</div>
+
+> **💡 Viewing Instructions**: 
+> - On GitHub: The video player should appear above. Click to play!
+> - Local viewing: Open `demo/demo.mp4` directly
+> - Alternative: [Download the demo video](./demo/demo.mp4) to watch offline
+
+---
+
 ## 📋 Table of Contents
 
 - [About the Project](#-about-the-project)
