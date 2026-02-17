@@ -29,7 +29,6 @@
 - [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
 - [License](#-license)
-- [Support](#-support)
 - [Roadmap](#roadmap)
 
 ---
