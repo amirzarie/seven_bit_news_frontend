@@ -56,7 +56,7 @@
 - [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
 - [License](#-license)
-- [Roadmap](#️-roadmap)
+- [Roadmap](#-roadmap)
 
 ---
 
@@ -610,7 +610,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🗺️ Roadmap
+## 🚀 Roadmap
 
 - [ ] Add dark mode support
 - [ ] Implement user preferences/settings
