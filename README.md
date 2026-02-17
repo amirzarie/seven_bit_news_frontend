@@ -2,14 +2,12 @@
 
 <div align="center">
 
-![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-![Firebase](https://img.shields.io/badge/Firebase-Authentication-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
-![Chart.js](https://img.shields.io/badge/Chart.js-Visualization-FF6384?style=for-the-badge&logo=chart.js&logoColor=white)
-![D3.js](https://img.shields.io/badge/D3.js-Data_Visualization-F9A03C?style=for-the-badge&logo=d3.js&logoColor=white)
+[![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
+[![Firebase](https://img.shields.io/badge/Firebase-Authentication-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![Chart.js](https://img.shields.io/badge/Chart.js-Visualization-FF6384?style=for-the-badge&logo=chart.js&logoColor=white)](https://www.chartjs.org/)
+[![D3.js](https://img.shields.io/badge/D3.js-Data_Visualization-F9A03C?style=for-the-badge&logo=d3.js&logoColor=white)](https://d3js.org/)
 
 **An intelligent news aggregation and analysis platform with interactive data visualizations**
-
-[Live Demo](#) • [Report Bug](#) • [Request Feature](#)
 
 </div>
 
@@ -17,18 +15,22 @@
 
 ## 📋 Table of Contents
 
-- [About the Project](#about-the-project)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Running Locally](#running-locally)
-- [Deployment](#deployment)
-- [Project Structure](#project-structure)
-- [Environment Configuration](#environment-configuration)
-- [Available Scripts](#available-scripts)
-- [Contributing](#contributing)
-- [License](#license)
+- [About the Project](#-about-the-project)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Prerequisites](#-prerequisites)
+- [Installation](#-installation)
+- [Running Locally](#-running-locally)
+- [Deployment](#-deployment)
+- [Project Structure](#-project-structure)
+- [Environment Configuration](#-environment-configuration)
+- [Available Scripts](#-available-scripts)
+- [Backend Integration](#-backend-integration)
+- [Troubleshooting](#-troubleshooting)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Support](#-support)
+- [Roadmap](#-roadmap)
 
 ---
 
