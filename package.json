@@ -1,7 +1,29 @@
 {
   "name": "seven_bit_news_frontend",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "description": "AI-powered news aggregation and analysis platform with interactive visualizations",
+  "author": "Amir Zarie <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amirzarie/seven_bit_news_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/amirzarie/seven_bit_news_frontend/issues"
+  },
+  "homepage": "https://github.com/amirzarie/seven_bit_news_frontend#readme",
+  "keywords": [
+    "news",
+    "ai",
+    "nlp",
+    "data-visualization",
+    "react",
+    "sentiment-analysis",
+    "openai",
+    "langchain",
+    "news-aggregator"
+  ],
   "dependencies": {
     "18": "^0.0.0",
     "@react-three/drei": "^9.117.3",
