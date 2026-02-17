@@ -17,20 +17,20 @@
 
 - [About the Project](#-about-the-project)
 - [Features](#-features)
-- [Tech Stack](#-tech-stack)
+- [Tech Stack](#tech-stack)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
 - [Running Locally](#-running-locally)
 - [Deployment](#-deployment)
 - [Project Structure](#-project-structure)
-- [Environment Configuration](#-environment-configuration)
+- [Environment Configuration](#environment-configuration)
 - [Available Scripts](#-available-scripts)
 - [Backend Integration](#-backend-integration)
 - [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
 - [License](#-license)
 - [Support](#-support)
-- [Roadmap](#-roadmap)
+- [Roadmap](#roadmap)
 
 ---
 
@@ -581,16 +581,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [D3.js](https://d3js.org/) - Data visualization
 - [React Router](https://reactrouter.com/) - Client-side routing
 - All the amazing open-source libraries used in this project
-
----
-
-## 📞 Support
-
-If you encounter any issues or have questions:
-
-1. Check the [Troubleshooting](#troubleshooting) section
-2. Search existing [Issues](https://github.com/yourusername/seven_bit_news_frontend/issues)
-3. Open a new issue with detailed information
 
 ---
 
