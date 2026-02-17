@@ -155,7 +155,29 @@ git clone https://github.com/yourusername/seven_bit_news_frontend.git
 cd seven_bit_news_frontend
 ```
 
-### 2. Install Dependencies
+### 2. Configure Environment Variables
+
+Create a `.env` file in the root directory:
+
+```bash
+cp .env.example .env
+```
+
+Then edit `.env` and add your Firebase configuration:
+
+```env
+REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+REACT_APP_FIREBASE_PROJECT_ID=your-project-id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your-project.firebasestorage.app
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+REACT_APP_FIREBASE_APP_ID=your_app_id
+REACT_APP_FIREBASE_MEASUREMENT_ID=your_measurement_id
+```
+
+> Get these values from your [Firebase Console](https://console.firebase.google.com/) → Project Settings → Your apps → Firebase SDK snippet
+
+### 3. Install Dependencies
 
 ```bash
 npm install
@@ -163,7 +185,7 @@ npm install
 
 This will install all required packages listed in `package.json`.
 
-### 3. Update Browser Compatibility Data (Optional)
+### 4. Update Browser Compatibility Data (Optional)
 
 If you see a browserslist warning, update it:
 

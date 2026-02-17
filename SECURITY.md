@@ -9,16 +9,19 @@ This document outlines the security practices for the Seven Bit News Frontend ap
 The following information in this repository is **safe to be public**:
 
 ### Firebase Configuration
-The Firebase configuration in `src/firebase.js` contains an API key that is **designed to be public**. This is standard practice for Firebase web applications.
+Firebase configuration is stored in environment variables (`.env` file) for better practice, though Firebase API keys are **designed to be public** in web applications.
 
-**Why is this safe?**
+**Why Firebase API keys are safe:**
 - Firebase API keys are not secret keys - they simply identify your Firebase project
 - Security is enforced through:
   - Firebase Authentication (user login required)
   - Firebase Security Rules (server-side access control)
   - Firebase App Check (prevents unauthorized access)
+  - Authorized domains (only specified domains can use your Firebase project)
   
 **Reference**: [Firebase API Key Security](https://firebase.google.com/docs/projects/api-keys)
+
+**Note**: Even if Firebase keys were accidentally exposed, they are not a security risk if you have proper Security Rules configured.
 
 ### API Endpoints
 The API endpoint URLs in `src/config.js` are public-facing and safe to expose.
