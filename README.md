@@ -24,19 +24,18 @@
 </div>
 
 <div align="center">
-  <video src="demo/demo.mp4" width="80%" controls></video>
-</div>
 
-<div align="center">
-  
-[![Watch Demo](https://img.shields.io/badge/▶️_Watch_Demo-Click_Here-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](./demo/demo.mp4)
+[![Watch Demo](https://img.shields.io/badge/▶️_WATCH_DEMO-Click_to_Download_(9MB)-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](./demo/demo.mp4)
+
+**Click the button above to view/download the demo video**
 
 </div>
 
-> **💡 Viewing Instructions**: 
-> - On GitHub: The video player should appear above. Click to play!
-> - Local viewing: Open `demo/demo.mp4` directly
-> - Alternative: [Download the demo video](./demo/demo.mp4) to watch offline
+> **💡 How to Watch**: 
+> - **Click the button above** → Opens the video file page → Click "Download" or "View raw"
+> - **Local viewing**: If you've cloned the repo, open `demo/demo.mp4` directly
+> 
+> *GitHub doesn't support inline video playback from repository files. For the best viewing experience, download the 9MB video or watch it after cloning the repo.*
 
 ---
 
