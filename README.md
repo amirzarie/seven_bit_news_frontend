@@ -23,19 +23,15 @@
 
 </div>
 
+https://github.com/user-attachments/assets/7064e70c-e8a8-4858-aabb-f4cad43587bb
+
 <div align="center">
 
-[![Watch Demo](https://img.shields.io/badge/▶️_WATCH_DEMO-Click_to_Download_(9MB)-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](./demo/demo.mp4)
+*Experience the full power of AI-driven news analysis, interactive charts, sentiment tracking, and real-time trending topics*
 
-**Click the button above to view/download the demo video**
+**Click play to watch the demo! ▶️**
 
 </div>
-
-> **💡 How to Watch**: 
-> - **Click the button above** → Opens the video file page → Click "Download" or "View raw"
-> - **Local viewing**: If you've cloned the repo, open `demo/demo.mp4` directly
-> 
-> *GitHub doesn't support inline video playback from repository files. For the best viewing experience, download the 9MB video or watch it after cloning the repo.*
 
 ---
 
