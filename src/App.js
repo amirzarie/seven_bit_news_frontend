@@ -410,17 +410,17 @@ function App() {
                                 ol: ({node, ...props}) => <ol style={{marginLeft: '1.5rem', marginTop: '0.5rem', marginBottom: '0.5rem'}} {...props} />,
                                 li: ({node, ...props}) => <li style={{marginBottom: '0.3rem', lineHeight: '1.6'}} {...props} />,
                                 p: ({node, ...props}) => <p style={{marginBottom: '0.8rem', lineHeight: '1.6'}} {...props} />,
-                                strong: ({node, ...props}) => <strong style={{fontWeight: 'bold', color: '#2563eb'}} {...props} />,
-                                em: ({node, ...props}) => <em style={{fontStyle: 'italic', color: '#6366f1'}} {...props} />,
+                                strong: ({node, ...props}) => <strong style={{fontWeight: 'bold', color: '#111827'}} {...props} />,
+                                em: ({node, ...props}) => <em style={{fontStyle: 'italic', color: '#6b7280'}} {...props} />,
                                 code: ({node, inline, ...props}) => 
                                   inline ? (
                                     <code style={{backgroundColor: '#f3f4f6', padding: '0.2rem 0.4rem', borderRadius: '0.25rem', fontFamily: 'monospace', fontSize: '0.9em', color: '#dc2626'}} {...props} />
                                   ) : (
                                     <code style={{display: 'block', backgroundColor: '#1f2937', color: '#f9fafb', padding: '1rem', borderRadius: '0.5rem', overflow: 'auto', fontFamily: 'monospace'}} {...props} />
                                   ),
-                                blockquote: ({node, ...props}) => <blockquote style={{borderLeft: '4px solid #3b82f6', paddingLeft: '1rem', marginLeft: '0', fontStyle: 'italic', color: '#4b5563', backgroundColor: '#f3f4f6', padding: '0.8rem 1rem', borderRadius: '0.25rem'}} {...props} />,
+                                blockquote: ({node, ...props}) => <blockquote style={{borderLeft: '4px solid #9ca3af', paddingLeft: '1rem', marginLeft: '0', fontStyle: 'italic', color: '#4b5563', backgroundColor: '#f3f4f6', padding: '0.8rem 1rem', borderRadius: '0.25rem'}} {...props} />,
                                 // eslint-disable-next-line jsx-a11y/anchor-has-content
-                                a: ({node, ...props}) => <a style={{color: '#2563eb', textDecoration: 'underline'}} {...props} target="_blank" rel="noopener noreferrer" />,
+                                a: ({node, ...props}) => <a style={{color: '#374151', textDecoration: 'underline'}} {...props} target="_blank" rel="noopener noreferrer" />,
                                 table: ({node, ...props}) => <table style={{borderCollapse: 'collapse', width: '100%', marginTop: '0.5rem', marginBottom: '0.5rem'}} {...props} />,
                                 th: ({node, ...props}) => <th style={{border: '1px solid #d1d5db', padding: '0.5rem', backgroundColor: '#f3f4f6', fontWeight: 'bold'}} {...props} />,
                                 td: ({node, ...props}) => <td style={{border: '1px solid #d1d5db', padding: '0.5rem'}} {...props} />,

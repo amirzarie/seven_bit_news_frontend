@@ -196,7 +196,7 @@ body {
 
 .assistant-message h1 {
   font-size: 1.5rem;
-  border-bottom: 2px solid #3b82f6;
+  border-bottom: 2px solid #9ca3af;
   padding-bottom: 0.3rem;
 }
 
@@ -221,19 +221,19 @@ body {
 }
 
 .assistant-message li::marker {
-  color: #3b82f6;
+  color: #6b7280;
   font-weight: bold;
 }
 
 .assistant-message strong {
   font-weight: 700;
-  color: #2563eb;
+  color: #111827;
   text-shadow: none;
 }
 
 .assistant-message em {
   font-style: italic;
-  color: #6366f1;
+  color: #6b7280;
 }
 
 .assistant-message code {
@@ -265,7 +265,7 @@ body {
 }
 
 .assistant-message blockquote {
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid #9ca3af;
   padding-left: 1rem;
   margin-left: 0;
   margin-top: 1rem;
@@ -278,13 +278,13 @@ body {
 }
 
 .assistant-message a {
-  color: #2563eb;
+  color: #374151;
   text-decoration: underline;
   transition: color 0.2s;
 }
 
 .assistant-message a:hover {
-  color: #1d4ed8;
+  color: #111827;
 }
 
 .assistant-message table {
